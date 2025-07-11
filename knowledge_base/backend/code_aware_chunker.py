@@ -10,8 +10,11 @@ from pathlib import Path
 import re
 import ast
 import json
+import logging
 from abc import ABC, abstractmethod
 from enum import Enum
+
+logger = logging.getLogger(__name__)
 
 class ChunkType(Enum):
     """Types of chunks for better categorization"""
@@ -118,7 +121,7 @@ class CodeAwareChunker:
         return ext_map.get(file_ext, 'text')
     
     def _chunk_python(self, content: str, file_path: str) -> List[CodeChunk]:
-        """Python-specific intelligent chunking"""
+        """Python-specific intelligent chunking using AST"""
         chunks = []
         
         try:
@@ -161,23 +164,23 @@ class CodeAwareChunker:
                     importance='high'
                 ))
             
-            # Extract classes with their methods
+            # Extract classes with their methods (complete class definitions)
             for node in ast.walk(tree):
                 if isinstance(node, ast.ClassDef):
                     class_chunk = self._extract_python_class(node, lines, file_path)
                     if class_chunk:
                         chunks.append(class_chunk)
-                
-                # Extract standalone functions
-                elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    # Check if function is not inside a class
-                    if not self._is_method(node, tree):
-                        func_chunk = self._extract_python_function(node, lines, file_path)
-                        if func_chunk:
-                            chunks.append(func_chunk)
+            
+            # Extract standalone functions (not inside classes)
+            for node in tree.body:  # Only top-level nodes
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    func_chunk = self._extract_python_function(node, lines, file_path)
+                    if func_chunk:
+                        chunks.append(func_chunk)
                             
-        except SyntaxError:
+        except SyntaxError as e:
             # Fallback to pattern-based chunking for invalid Python
+            logger.warning(f"Python AST parsing failed for {file_path}: {e}")
             return self._chunk_by_patterns(content, file_path, 'python')
         
         # If no logical chunks found, fall back to size-based
@@ -468,19 +471,30 @@ class CodeAwareChunker:
         return chunks
     
     def _chunk_markdown(self, content: str, file_path: str) -> List[CodeChunk]:
-        """Markdown-specific intelligent chunking by sections"""
+        """Markdown-specific intelligent chunking by headers using regex"""
         chunks = []
         lines = content.split('\n')
         
-        # Split by headers
+        # Split by headers (both # and underline styles)
         current_section = []
         current_header = None
         header_level = 0
+        section_start_line = 1
         
         for i, line in enumerate(lines):
-            header_match = re.match(r'^(#+)\s+(.+)$', line.strip())
+            # Check for ATX headers (# ## ###)
+            header_match = re.match(r'^(#{1,6})\s+(.+)$', line.strip())
             
-            if header_match:
+            # Check for Setext headers (underlined with = or -)
+            setext_match = None
+            if i > 0 and not header_match:
+                prev_line = lines[i-1].strip()
+                if prev_line and re.match(r'^=+$', line.strip()):
+                    setext_match = (1, prev_line)  # H1 equivalent
+                elif prev_line and re.match(r'^-+$', line.strip()):
+                    setext_match = (2, prev_line)  # H2 equivalent
+            
+            if header_match or setext_match:
                 # Save previous section
                 if current_section and current_header:
                     section_content = '\n'.join(current_section)
@@ -495,17 +509,25 @@ class CodeAwareChunker:
                                 'type': 'section',
                                 'description': f'Documentation section: {current_header}'
                             },
-                            start_line=max(1, i - len(current_section)),
+                            start_line=section_start_line,
                             end_line=i,
                             chunk_type=ChunkType.DOCUMENTATION,
                             language='markdown',
-                            importance='medium'
+                            importance=self._get_header_importance(header_level)
                         ))
                 
                 # Start new section
-                header_level = len(header_match.group(1))
-                current_header = header_match.group(2)
-                current_section = [line]
+                if header_match:
+                    header_level = len(header_match.group(1))
+                    current_header = header_match.group(2)
+                    current_section = [line]
+                else:  # setext_match
+                    header_level = setext_match[0]
+                    current_header = setext_match[1]
+                    # Include the previous line and underline
+                    current_section = [lines[i-1], line]
+                
+                section_start_line = i + 1
             else:
                 current_section.append(line)
         
@@ -523,14 +545,44 @@ class CodeAwareChunker:
                         'type': 'section',
                         'description': f'Documentation section: {current_header}'
                     },
-                    start_line=len(lines) - len(current_section),
+                    start_line=section_start_line,
                     end_line=len(lines),
                     chunk_type=ChunkType.DOCUMENTATION,
                     language='markdown',
-                    importance='medium'
+                    importance=self._get_header_importance(header_level)
                 ))
         
+        # If no headers found, check for content and create a single chunk
+        if not chunks and content.strip():
+            chunks.append(CodeChunk(
+                content=content,
+                metadata={
+                    'file_path': file_path,
+                    'language': 'markdown',
+                    'section_title': 'Content',
+                    'header_level': 0,
+                    'type': 'content',
+                    'description': 'Markdown content without headers'
+                },
+                start_line=1,
+                end_line=len(lines),
+                chunk_type=ChunkType.DOCUMENTATION,
+                language='markdown',
+                importance='medium'
+            ))
+        
         return chunks if chunks else self._chunk_by_size(content, file_path, 'markdown')
+    
+    def _get_header_importance(self, header_level: int) -> str:
+        """Determine importance based on header level"""
+        if header_level == 1:
+            return 'high'
+        elif header_level == 2:
+            return 'high'
+        elif header_level == 3:
+            return 'medium'
+        else:
+            return 'low'
     
     def _chunk_config(self, content: str, file_path: str, language: str) -> List[CodeChunk]:
         """Configuration file chunking (JSON, YAML, TOML)"""

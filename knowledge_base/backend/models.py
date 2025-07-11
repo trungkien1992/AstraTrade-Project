@@ -43,3 +43,4 @@ class ProcessedDocument:
     subcategory: Optional[str]
     metadata: Dict[str, Any]
     source_url: Optional[str] = None
+    file_path: Optional[str] = None

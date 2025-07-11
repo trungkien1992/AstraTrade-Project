@@ -431,10 +431,74 @@ class AstraTradeRAG:
         return "low"
     
     def _chunk_document(self, doc: ProcessedDocument) -> List[Dict[str, Any]]:
-        """Chunk a document into smaller pieces"""
+        """Chunk a document into smaller pieces using code-aware chunking"""
+        chunked_docs = []
+        
+        # Check if code-aware chunking is enabled and we have a file path
+        if (RAG_CONFIG.get('code_aware_chunking', False) and 
+            hasattr(doc, 'file_path') and doc.file_path):
+            
+            # Use CodeAwareChunker for supported file types
+            try:
+                from code_aware_chunker import CodeAwareChunker
+                code_chunker = CodeAwareChunker(RAG_CONFIG)
+                code_chunks = code_chunker.chunk_file(doc.file_path, doc.content)
+                
+                # Convert CodeChunk objects to our format
+                for i, code_chunk in enumerate(code_chunks):
+                    chunk_id = f"{doc.category}_{doc.subcategory}_{i}" if doc.subcategory else f"{doc.category}_{i}"
+                    
+                    # Clean metadata - ensure all values are strings, numbers, or booleans
+                    clean_metadata = {
+                        "title": str(doc.title) if doc.title else "Unknown",
+                        "category": str(doc.category) if doc.category else "general",
+                        "subcategory": str(doc.subcategory) if doc.subcategory else "general",
+                        "chunk_index": i,
+                        "total_chunks": len(code_chunks),
+                        "source_url": str(doc.source_url) if doc.source_url else "unknown",
+                        "chunk_type": str(code_chunk.chunk_type.value),
+                        "language": str(code_chunk.language),
+                        "importance": str(code_chunk.importance),
+                        "start_line": code_chunk.start_line,
+                        "end_line": code_chunk.end_line,
+                        "code_aware": True
+                    }
+                    
+                    # Add metadata from code chunk
+                    for key, value in code_chunk.metadata.items():
+                        if value is None:
+                            clean_metadata[key] = "unknown"
+                        elif isinstance(value, (str, int, float, bool)):
+                            clean_metadata[key] = value
+                        else:
+                            clean_metadata[key] = str(value)
+                    
+                    # Add other metadata from doc, ensuring all values are properly converted
+                    for key, value in doc.metadata.items():
+                        if key not in clean_metadata:
+                            if value is None:
+                                clean_metadata[key] = "unknown"
+                            elif isinstance(value, (str, int, float, bool)):
+                                clean_metadata[key] = value
+                            else:
+                                clean_metadata[key] = str(value)
+                    
+                    chunked_docs.append({
+                        "id": chunk_id,
+                        "content": code_chunk.content,
+                        "metadata": clean_metadata
+                    })
+                
+                logger.info(f"📝 Code-aware chunking: {len(code_chunks)} chunks from {doc.file_path}")
+                return chunked_docs
+                
+            except Exception as e:
+                logger.warning(f"Code-aware chunking failed for {doc.file_path}: {e}")
+                # Fall back to regular chunking
+        
+        # Fallback to regular text splitting
         chunks = self.text_splitter.split_text(doc.content)
         
-        chunked_docs = []
         for i, chunk in enumerate(chunks):
             chunk_id = f"{doc.category}_{doc.subcategory}_{i}" if doc.subcategory else f"{doc.category}_{i}"
             
@@ -445,7 +509,8 @@ class AstraTradeRAG:
                 "subcategory": str(doc.subcategory) if doc.subcategory else "general",
                 "chunk_index": i,
                 "total_chunks": len(chunks),
-                "source_url": str(doc.source_url) if doc.source_url else "unknown"
+                "source_url": str(doc.source_url) if doc.source_url else "unknown",
+                "code_aware": False
             }
             
             # Add other metadata, ensuring all values are properly converted
