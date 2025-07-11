@@ -1,0 +1,1293 @@
+{
+  "overall_summary": {
+    "total_tests": 35,
+    "successful_tests": 35,
+    "overall_success_rate": 1.0,
+    "avg_confidence": 0.98,
+    "unique_categories": 7,
+    "total_keywords": 503,
+    "avg_keywords_per_test": 14.371428571428572
+  },
+  "platform_summaries": {
+    "extended_exchange": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 1.0,
+      "categories_detected": [
+        "market_data"
+      ],
+      "avg_keywords": 19
+    },
+    "x10_python_sdk": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 0.9600000000000001,
+      "categories_detected": [
+        "python_sdk"
+      ],
+      "avg_keywords": 11.2
+    },
+    "starknet_dart": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 1.0,
+      "categories_detected": [
+        "dart_sdk"
+      ],
+      "avg_keywords": 18
+    },
+    "cairo_lang": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 1.0,
+      "categories_detected": [
+        "cairo_lang"
+      ],
+      "avg_keywords": 12
+    },
+    "avnu_paymaster": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 1.0,
+      "categories_detected": [
+        "paymaster"
+      ],
+      "avg_keywords": 13
+    },
+    "web3auth": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 0.8999999999999999,
+      "categories_detected": [
+        "web3_sdk"
+      ],
+      "avg_keywords": 13
+    },
+    "chipi_pay": {
+      "total_tests": 5,
+      "successful_tests": 5,
+      "success_rate": 1.0,
+      "avg_confidence": 1.0,
+      "categories_detected": [
+        "configuration"
+      ],
+      "avg_keywords": 14.4
+    }
+  },
+  "optimization_metrics": {
+    "query_count": 35,
+    "avg_response_time": 0.00039645603724888394,
+    "avg_similarity_score": 0.98,
+    "error_rate": 0.0,
+    "optimization_suggestions": [
+      "Cache hit rate (0.00%) below threshold. Consider:",
+      "- Implementing query result caching",
+      "- Adding query normalization",
+      "- Increasing cache size",
+      "- Implementing semantic caching"
+    ]
+  },
+  "test_results": [
+    {
+      "query": "How to place a buy order using Extended Exchange API?",
+      "platform": "extended_exchange",
+      "category": "market_data",
+      "confidence": 1.0,
+      "keywords": [
+        "sell",
+        "authentication",
+        "order book",
+        "market data",
+        "ticker",
+        "market",
+        "endpoint",
+        "parameter",
+        "depth",
+        "request",
+        "exchange",
+        "type",
+        "price",
+        "trading api",
+        "extended exchange",
+        "key",
+        "24hr ticker",
+        "order",
+        "buy"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "market_data",
+        "extended_exchange",
+        "rest_api",
+        "authentication",
+        "trading"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "What are the authentication requirements for Extended Exchange?",
+      "platform": "extended_exchange",
+      "category": "market_data",
+      "confidence": 1.0,
+      "keywords": [
+        "sell",
+        "authentication",
+        "order book",
+        "market data",
+        "ticker",
+        "market",
+        "endpoint",
+        "parameter",
+        "depth",
+        "request",
+        "exchange",
+        "type",
+        "price",
+        "trading api",
+        "extended exchange",
+        "key",
+        "24hr ticker",
+        "order",
+        "buy"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "market_data",
+        "extended_exchange",
+        "rest_api",
+        "authentication",
+        "trading"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to get real-time market data from Extended Exchange?",
+      "platform": "extended_exchange",
+      "category": "market_data",
+      "confidence": 1.0,
+      "keywords": [
+        "sell",
+        "authentication",
+        "order book",
+        "market data",
+        "ticker",
+        "market",
+        "endpoint",
+        "parameter",
+        "depth",
+        "request",
+        "exchange",
+        "type",
+        "price",
+        "trading api",
+        "extended exchange",
+        "key",
+        "24hr ticker",
+        "order",
+        "buy"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "market_data",
+        "extended_exchange",
+        "rest_api",
+        "authentication",
+        "trading"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Extended Exchange order book depth API documentation",
+      "platform": "extended_exchange",
+      "category": "market_data",
+      "confidence": 1.0,
+      "keywords": [
+        "sell",
+        "authentication",
+        "order book",
+        "market data",
+        "ticker",
+        "market",
+        "endpoint",
+        "parameter",
+        "depth",
+        "request",
+        "exchange",
+        "type",
+        "price",
+        "trading api",
+        "extended exchange",
+        "key",
+        "24hr ticker",
+        "order",
+        "buy"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "market_data",
+        "extended_exchange",
+        "rest_api",
+        "authentication",
+        "trading"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to cancel orders on Extended Exchange?",
+      "platform": "extended_exchange",
+      "category": "market_data",
+      "confidence": 1.0,
+      "keywords": [
+        "sell",
+        "authentication",
+        "order book",
+        "market data",
+        "ticker",
+        "market",
+        "endpoint",
+        "parameter",
+        "depth",
+        "request",
+        "exchange",
+        "type",
+        "price",
+        "trading api",
+        "extended exchange",
+        "key",
+        "24hr ticker",
+        "order",
+        "buy"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "market_data",
+        "extended_exchange",
+        "rest_api",
+        "authentication",
+        "trading"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to install X10 Python SDK?",
+      "platform": "x10_python_sdk",
+      "category": "python_sdk",
+      "confidence": 0.9500000000000001,
+      "keywords": [
+        "python sdk",
+        "buy",
+        "type",
+        "price",
+        "x10 python",
+        "import",
+        "await",
+        "balance",
+        "order",
+        "pip install",
+        "key"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "python_sdk",
+        "x10_python_sdk",
+        "rest_api",
+        "authentication",
+        "trading",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Python example for placing trades with X10 SDK",
+      "platform": "x10_python_sdk",
+      "category": "python_sdk",
+      "confidence": 0.9500000000000001,
+      "keywords": [
+        "python sdk",
+        "buy",
+        "type",
+        "price",
+        "x10 python",
+        "import",
+        "await",
+        "balance",
+        "order",
+        "pip install",
+        "key"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "python_sdk",
+        "x10_python_sdk",
+        "rest_api",
+        "authentication",
+        "trading",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "X10 Python SDK authentication setup",
+      "platform": "x10_python_sdk",
+      "category": "python_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "python sdk",
+        "buy",
+        "type",
+        "authentication",
+        "price",
+        "x10 python",
+        "import",
+        "await",
+        "balance",
+        "order",
+        "pip install",
+        "key"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "python_sdk",
+        "x10_python_sdk",
+        "rest_api",
+        "authentication",
+        "trading",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to get account balance using X10 Python?",
+      "platform": "x10_python_sdk",
+      "category": "python_sdk",
+      "confidence": 0.9500000000000001,
+      "keywords": [
+        "python sdk",
+        "buy",
+        "type",
+        "price",
+        "x10 python",
+        "import",
+        "await",
+        "balance",
+        "order",
+        "pip install",
+        "key"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "python_sdk",
+        "x10_python_sdk",
+        "rest_api",
+        "authentication",
+        "trading",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "X10 SDK async trading client implementation",
+      "platform": "x10_python_sdk",
+      "category": "python_sdk",
+      "confidence": 0.9500000000000001,
+      "keywords": [
+        "python sdk",
+        "buy",
+        "type",
+        "price",
+        "x10 python",
+        "import",
+        "await",
+        "balance",
+        "order",
+        "pip install",
+        "key"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "python_sdk",
+        "x10_python_sdk",
+        "rest_api",
+        "authentication",
+        "trading",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to connect to Starknet using Dart SDK?",
+      "platform": "starknet_dart",
+      "category": "dart_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "class",
+        "calldata",
+        "account",
+        "flutter",
+        "invoke",
+        "node",
+        "provider",
+        "mobile",
+        "dart sdk",
+        "stateful",
+        "dart",
+        "package",
+        "await",
+        "wallet",
+        "import",
+        "address",
+        "signer",
+        "widget"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "dart_sdk",
+        "starknet_dart",
+        "rest_api",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Starknet.dart wallet integration example",
+      "platform": "starknet_dart",
+      "category": "dart_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "class",
+        "calldata",
+        "account",
+        "flutter",
+        "invoke",
+        "node",
+        "provider",
+        "mobile",
+        "dart sdk",
+        "stateful",
+        "dart",
+        "package",
+        "await",
+        "wallet",
+        "import",
+        "address",
+        "signer",
+        "widget"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "dart_sdk",
+        "starknet_dart",
+        "rest_api",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to invoke smart contracts with Starknet Dart?",
+      "platform": "starknet_dart",
+      "category": "dart_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "class",
+        "calldata",
+        "account",
+        "flutter",
+        "invoke",
+        "node",
+        "provider",
+        "mobile",
+        "dart sdk",
+        "stateful",
+        "dart",
+        "package",
+        "await",
+        "wallet",
+        "import",
+        "address",
+        "signer",
+        "widget"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "dart_sdk",
+        "starknet_dart",
+        "rest_api",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Flutter app with Starknet.dart setup guide",
+      "platform": "starknet_dart",
+      "category": "dart_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "class",
+        "calldata",
+        "account",
+        "flutter",
+        "invoke",
+        "node",
+        "provider",
+        "mobile",
+        "dart sdk",
+        "stateful",
+        "dart",
+        "package",
+        "await",
+        "wallet",
+        "import",
+        "address",
+        "signer",
+        "widget"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "dart_sdk",
+        "starknet_dart",
+        "rest_api",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Starknet Dart account management",
+      "platform": "starknet_dart",
+      "category": "dart_sdk",
+      "confidence": 1.0,
+      "keywords": [
+        "class",
+        "calldata",
+        "account",
+        "flutter",
+        "invoke",
+        "node",
+        "provider",
+        "mobile",
+        "dart sdk",
+        "stateful",
+        "dart",
+        "package",
+        "await",
+        "wallet",
+        "import",
+        "address",
+        "signer",
+        "widget"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "dart_sdk",
+        "starknet_dart",
+        "rest_api",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to write ERC-20 token in Cairo?",
+      "platform": "cairo_lang",
+      "category": "cairo_lang",
+      "confidence": 1.0,
+      "keywords": [
+        "cairo lang",
+        "contract",
+        "external",
+        "constructor",
+        "cairo",
+        "felt252",
+        "struct",
+        "cairo language",
+        "impl",
+        "starknet",
+        "storage",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "cairo_lang",
+        "cairo_lang",
+        "authentication"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Cairo smart contract deployment guide",
+      "platform": "cairo_lang",
+      "category": "cairo_lang",
+      "confidence": 1.0,
+      "keywords": [
+        "cairo lang",
+        "contract",
+        "external",
+        "constructor",
+        "cairo",
+        "felt252",
+        "struct",
+        "cairo language",
+        "impl",
+        "starknet",
+        "storage",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "cairo_lang",
+        "cairo_lang",
+        "authentication"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Cairo felt252 data type usage",
+      "platform": "cairo_lang",
+      "category": "cairo_lang",
+      "confidence": 1.0,
+      "keywords": [
+        "cairo lang",
+        "contract",
+        "external",
+        "constructor",
+        "cairo",
+        "felt252",
+        "struct",
+        "cairo language",
+        "impl",
+        "starknet",
+        "storage",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "cairo_lang",
+        "cairo_lang",
+        "authentication"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Cairo contract storage and events",
+      "platform": "cairo_lang",
+      "category": "cairo_lang",
+      "confidence": 1.0,
+      "keywords": [
+        "cairo lang",
+        "contract",
+        "external",
+        "constructor",
+        "cairo",
+        "felt252",
+        "struct",
+        "cairo language",
+        "impl",
+        "starknet",
+        "storage",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "cairo_lang",
+        "cairo_lang",
+        "authentication"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Cairo testing and debugging best practices",
+      "platform": "cairo_lang",
+      "category": "cairo_lang",
+      "confidence": 1.0,
+      "keywords": [
+        "cairo lang",
+        "contract",
+        "external",
+        "constructor",
+        "cairo",
+        "felt252",
+        "struct",
+        "cairo language",
+        "impl",
+        "starknet",
+        "storage",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "reference",
+      "tags": [
+        "cairo_lang",
+        "cairo_lang",
+        "authentication"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to implement AVNU paymaster for gasless transactions?",
+      "platform": "avnu_paymaster",
+      "category": "paymaster",
+      "confidence": 1.0,
+      "keywords": [
+        "sponsored",
+        "gas",
+        "user operation",
+        "sponsored transaction",
+        "account abstraction",
+        "paymaster",
+        "user operations",
+        "gasless",
+        "transaction",
+        "import",
+        "avnu",
+        "fee",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "paymaster",
+        "avnu_paymaster",
+        "blockchain",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "AVNU paymaster integration with Starknet",
+      "platform": "avnu_paymaster",
+      "category": "paymaster",
+      "confidence": 1.0,
+      "keywords": [
+        "sponsored",
+        "gas",
+        "user operation",
+        "sponsored transaction",
+        "account abstraction",
+        "paymaster",
+        "user operations",
+        "gasless",
+        "transaction",
+        "import",
+        "avnu",
+        "fee",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "paymaster",
+        "avnu_paymaster",
+        "blockchain",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Gas sponsorship setup using AVNU",
+      "platform": "avnu_paymaster",
+      "category": "paymaster",
+      "confidence": 1.0,
+      "keywords": [
+        "sponsored",
+        "gas",
+        "user operation",
+        "sponsored transaction",
+        "account abstraction",
+        "paymaster",
+        "user operations",
+        "gasless",
+        "transaction",
+        "import",
+        "avnu",
+        "fee",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "paymaster",
+        "avnu_paymaster",
+        "blockchain",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "AVNU paymaster fee calculation",
+      "platform": "avnu_paymaster",
+      "category": "paymaster",
+      "confidence": 1.0,
+      "keywords": [
+        "sponsored",
+        "gas",
+        "user operation",
+        "sponsored transaction",
+        "account abstraction",
+        "paymaster",
+        "user operations",
+        "gasless",
+        "transaction",
+        "import",
+        "avnu",
+        "fee",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "paymaster",
+        "avnu_paymaster",
+        "blockchain",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Account abstraction with AVNU paymaster",
+      "platform": "avnu_paymaster",
+      "category": "paymaster",
+      "confidence": 1.0,
+      "keywords": [
+        "sponsored",
+        "gas",
+        "user operation",
+        "sponsored transaction",
+        "account abstraction",
+        "paymaster",
+        "user operations",
+        "gasless",
+        "transaction",
+        "import",
+        "avnu",
+        "fee",
+        "address"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "paymaster",
+        "avnu_paymaster",
+        "blockchain",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to integrate Web3Auth for social login?",
+      "platform": "web3auth",
+      "category": "web3_sdk",
+      "confidence": 0.8999999999999999,
+      "keywords": [
+        "web3",
+        "verification",
+        "authentication",
+        "method",
+        "web3auth",
+        "biometric",
+        "request",
+        "social login",
+        "key",
+        "provider",
+        "import",
+        "private key",
+        "social recovery"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "web3_sdk",
+        "web3auth",
+        "rest_api",
+        "authentication",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Web3Auth multi-factor authentication setup",
+      "platform": "web3auth",
+      "category": "web3_sdk",
+      "confidence": 0.8999999999999999,
+      "keywords": [
+        "web3",
+        "verification",
+        "authentication",
+        "method",
+        "web3auth",
+        "biometric",
+        "request",
+        "social login",
+        "key",
+        "provider",
+        "import",
+        "private key",
+        "social recovery"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "web3_sdk",
+        "web3auth",
+        "rest_api",
+        "authentication",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Web3Auth private key management",
+      "platform": "web3auth",
+      "category": "web3_sdk",
+      "confidence": 0.8999999999999999,
+      "keywords": [
+        "web3",
+        "verification",
+        "authentication",
+        "method",
+        "web3auth",
+        "biometric",
+        "request",
+        "social login",
+        "key",
+        "provider",
+        "import",
+        "private key",
+        "social recovery"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "web3_sdk",
+        "web3auth",
+        "rest_api",
+        "authentication",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Web3Auth wallet connection flow",
+      "platform": "web3auth",
+      "category": "web3_sdk",
+      "confidence": 0.8999999999999999,
+      "keywords": [
+        "web3",
+        "verification",
+        "authentication",
+        "method",
+        "web3auth",
+        "biometric",
+        "request",
+        "social login",
+        "key",
+        "provider",
+        "import",
+        "private key",
+        "social recovery"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "web3_sdk",
+        "web3auth",
+        "rest_api",
+        "authentication",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "Web3Auth custom authentication providers",
+      "platform": "web3auth",
+      "category": "web3_sdk",
+      "confidence": 0.8999999999999999,
+      "keywords": [
+        "web3",
+        "verification",
+        "authentication",
+        "method",
+        "web3auth",
+        "biometric",
+        "request",
+        "social login",
+        "key",
+        "provider",
+        "import",
+        "private key",
+        "social recovery"
+      ],
+      "importance": "medium",
+      "doc_type": "api",
+      "tags": [
+        "web3_sdk",
+        "web3auth",
+        "rest_api",
+        "authentication",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "How to integrate ChipiPay payment gateway?",
+      "platform": "chipi_pay",
+      "category": "configuration",
+      "confidence": 1.0,
+      "keywords": [
+        "env",
+        "payment processing",
+        "type",
+        "payment",
+        "environment",
+        "status",
+        "merchant",
+        "header",
+        "order",
+        "key",
+        "gateway",
+        "import",
+        "body",
+        "config"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "configuration",
+        "chipi_pay",
+        "rest_api",
+        "authentication",
+        "trading",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "ChipiPay cryptocurrency payment processing",
+      "platform": "chipi_pay",
+      "category": "configuration",
+      "confidence": 1.0,
+      "keywords": [
+        "env",
+        "payment processing",
+        "type",
+        "payment",
+        "environment",
+        "status",
+        "merchant",
+        "header",
+        "order",
+        "key",
+        "gateway",
+        "import",
+        "body",
+        "config"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "configuration",
+        "chipi_pay",
+        "rest_api",
+        "authentication",
+        "trading",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "ChipiPay webhook implementation",
+      "platform": "chipi_pay",
+      "category": "configuration",
+      "confidence": 1.0,
+      "keywords": [
+        "env",
+        "payment processing",
+        "type",
+        "payment",
+        "environment",
+        "status",
+        "merchant",
+        "header",
+        "order",
+        "key",
+        "gateway",
+        "import",
+        "body",
+        "config"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "configuration",
+        "chipi_pay",
+        "rest_api",
+        "authentication",
+        "trading",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "ChipiPay subscription payment setup",
+      "platform": "chipi_pay",
+      "category": "configuration",
+      "confidence": 1.0,
+      "keywords": [
+        "env",
+        "payment processing",
+        "type",
+        "setup",
+        "payment",
+        "environment",
+        "status",
+        "merchant",
+        "installation",
+        "header",
+        "order",
+        "key",
+        "gateway",
+        "import",
+        "body",
+        "config"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "configuration",
+        "chipi_pay",
+        "rest_api",
+        "authentication",
+        "trading",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "ChipiPay multi-currency support",
+      "platform": "chipi_pay",
+      "category": "configuration",
+      "confidence": 1.0,
+      "keywords": [
+        "env",
+        "payment processing",
+        "type",
+        "payment",
+        "environment",
+        "status",
+        "merchant",
+        "header",
+        "order",
+        "key",
+        "gateway",
+        "import",
+        "body",
+        "config"
+      ],
+      "importance": "medium",
+      "doc_type": "example",
+      "tags": [
+        "configuration",
+        "chipi_pay",
+        "rest_api",
+        "authentication",
+        "trading",
+        "mobile",
+        "python"
+      ],
+      "success": true,
+      "error": null
+    }
+  ],
+  "metadata": {
+    "test_date": "2025-07-11 13:22:52",
+    "test_type": "categorization_system",
+    "platforms_tested": [
+      "extended_exchange",
+      "x10_python_sdk",
+      "starknet_dart",
+      "cairo_lang",
+      "avnu_paymaster",
+      "web3auth",
+      "chipi_pay"
+    ],
+    "total_queries": 35,
+    "features_tested": [
+      "Document categorization",
+      "Platform detection",
+      "Keyword extraction",
+      "Importance assessment",
+      "Document type classification",
+      "Tag generation"
+    ]
+  }
+}
