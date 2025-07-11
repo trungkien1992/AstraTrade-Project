@@ -112,12 +112,10 @@ class AstraTradeRAG:
                 embedding_function=embedding_function,
                 metadata={
                     "description": "AstraTrade multi-platform trading knowledge base",
-                    "platforms": RAG_CONFIG["platforms"],
-                    "ragflow_features": {
-                        "template_chunking": RAG_CONFIG["template_chunking"],
-                        "grounded_citations": RAG_CONFIG["grounded_citations"],
-                        "deep_doc_understanding": RAG_CONFIG["deep_doc_understanding"]
-                    }
+                    "platforms_count": str(len(RAG_CONFIG["platforms"])),
+                    "template_chunking": str(RAG_CONFIG["template_chunking"]),
+                    "grounded_citations": str(RAG_CONFIG["grounded_citations"]),
+                    "deep_doc_understanding": str(RAG_CONFIG["deep_doc_understanding"])
                 }
             )
             logger.info(f"✅ Created new collection: {RAG_CONFIG['collection_name']}")
@@ -148,7 +146,8 @@ class AstraTradeRAG:
         # Import here to avoid circular imports
         from indexers import (
             ExtendedExchangeIndexer, X10PythonSDKIndexer, StarknetDartIndexer,
-            CairoLangIndexer, AVNUPaymasterIndexer, Web3AuthIndexer, ChipiPayIndexer
+            CairoLangIndexer, AVNUPaymasterIndexer, Web3AuthIndexer, ChipiPayIndexer,
+            ProductDesignIndexer
         )
         
         self.platform_indexers = {
@@ -158,7 +157,8 @@ class AstraTradeRAG:
             "cairo_lang": CairoLangIndexer(),
             "avnu_paymaster": AVNUPaymasterIndexer(),
             "web3auth": Web3AuthIndexer(),
-            "chipi_pay": ChipiPayIndexer()
+            "chipi_pay": ChipiPayIndexer(),
+            "product_design": ProductDesignIndexer()
         }
         
     def _initialize_quality_assessor(self):
@@ -174,23 +174,33 @@ class AstraTradeRAG:
         
         if force_reindex:
             logger.info("🔄 Force reindexing - clearing existing collection...")
-            self.collection.delete()
-            embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
-                model_name=RAG_CONFIG["embedding_model"]
-            )
-            self.collection = self.chroma_client.create_collection(
-                name=RAG_CONFIG["collection_name"],
-                embedding_function=embedding_function,
-                metadata={
-                    "description": "AstraTrade multi-platform trading knowledge base",
-                    "platforms": RAG_CONFIG["platforms"],
-                    "ragflow_features": {
-                        "template_chunking": RAG_CONFIG["template_chunking"],
-                        "grounded_citations": RAG_CONFIG["grounded_citations"],
-                        "deep_doc_understanding": RAG_CONFIG["deep_doc_understanding"]
-                    }
-                }
-            )
+            # Delete all documents in the collection
+            try:
+                existing_docs = self.collection.get()
+                if existing_docs['ids']:
+                    self.collection.delete(ids=existing_docs['ids'])
+            except Exception as e:
+                logger.warning(f"Could not clear existing collection: {e}")
+                # If we can't clear, let's delete and recreate the collection
+                try:
+                    self.chroma_client.delete_collection(name=RAG_CONFIG["collection_name"])
+                    embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
+                        model_name=RAG_CONFIG["embedding_model"]
+                    )
+                    self.collection = self.chroma_client.create_collection(
+                        name=RAG_CONFIG["collection_name"],
+                        embedding_function=embedding_function,
+                        metadata={
+                            "description": "AstraTrade multi-platform trading knowledge base",
+                            "platforms_count": str(len(RAG_CONFIG["platforms"])),
+                            "template_chunking": str(RAG_CONFIG["template_chunking"]),
+                            "grounded_citations": str(RAG_CONFIG["grounded_citations"]),
+                            "deep_doc_understanding": str(RAG_CONFIG["deep_doc_understanding"])
+                        }
+                    )
+                except Exception as e2:
+                    logger.error(f"Could not recreate collection: {e2}")
+                    return {"status": "error", "message": f"Failed to reset collection: {e2}"}
         
         # Collect documents from all platforms
         platform_results = await self._index_all_platforms()
@@ -428,18 +438,29 @@ class AstraTradeRAG:
         for i, chunk in enumerate(chunks):
             chunk_id = f"{doc.category}_{doc.subcategory}_{i}" if doc.subcategory else f"{doc.category}_{i}"
             
+            # Clean metadata - ensure all values are strings, numbers, or booleans
+            clean_metadata = {
+                "title": str(doc.title) if doc.title else "Unknown",
+                "category": str(doc.category) if doc.category else "general",
+                "subcategory": str(doc.subcategory) if doc.subcategory else "general",
+                "chunk_index": i,
+                "total_chunks": len(chunks),
+                "source_url": str(doc.source_url) if doc.source_url else "unknown"
+            }
+            
+            # Add other metadata, ensuring all values are properly converted
+            for key, value in doc.metadata.items():
+                if value is None:
+                    clean_metadata[key] = "unknown"
+                elif isinstance(value, (str, int, float, bool)):
+                    clean_metadata[key] = value
+                else:
+                    clean_metadata[key] = str(value)
+            
             chunked_docs.append({
                 "id": chunk_id,
                 "content": chunk,
-                "metadata": {
-                    "title": doc.title,
-                    "category": doc.category,
-                    "subcategory": doc.subcategory,
-                    "chunk_index": i,
-                    "total_chunks": len(chunks),
-                    "source_url": doc.source_url,
-                    **doc.metadata
-                }
+                "metadata": clean_metadata
             })
         
         return chunked_docs
