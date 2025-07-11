@@ -370,3 +370,178 @@ INFO:     127.0.0.1:51065 - "POST /search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:51071 - "POST /search HTTP/1.1" 200 OK
 Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.80it/s]
 INFO:     127.0.0.1:51077 - "POST /search HTTP/1.1" 200 OK
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'config.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [72181]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
+    from config import RAG_CONFIG
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
+    from pydantic_settings import BaseSettings, SettingsConfigDict
+ModuleNotFoundError: No module named 'pydantic_settings'
+INFO:watchfiles.main:3 changes detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'security.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
+    from config import RAG_CONFIG
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
+    from pydantic_settings import BaseSettings, SettingsConfigDict
+ModuleNotFoundError: No module named 'pydantic_settings'
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
+    from config import RAG_CONFIG, settings
+  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
+    from pydantic_settings import BaseSettings, SettingsConfigDict
+ModuleNotFoundError: No module named 'pydantic_settings'
+INFO:watchfiles.main:3 changes detected
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Started server process [73977]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+✅ Claude Code enhancements initialized
+INFO:     127.0.0.1:51682 - "POST /index HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:51694 - "POST /index HTTP/1.1" 200 OK
+INFO:rag_system:🔍 Indexing extended_exchange documentation...
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.87it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.41it/s]
+INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.78it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.91it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.94it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.52it/s]
+INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
+INFO:rag_system:✅ Indexed 132 documents from extended_exchange
+INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.00it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.01it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.04it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.67it/s]
+INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
+INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
+INFO:rag_system:🔍 Indexing starknet_dart documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.89it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.86it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.44it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.90it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.90it/s]
+INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
+INFO:rag_system:✅ Indexed 114 documents from starknet_dart
+INFO:rag_system:🔍 Indexing cairo_lang documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.85it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.68it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.75it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.24it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.41it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.41it/s]
+INFO:indexers:Indexed 114 chunks from Cairo_lang.md
+INFO:rag_system:✅ Indexed 114 documents from cairo_lang
+INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.71it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.71it/s]
+INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.04it/s]
+INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 20.27it/s]
+INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.87it/s]
+INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
+INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
+INFO:rag_system:🔍 Indexing web3auth documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.86it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.96it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.72it/s]
+INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.93it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  2.00it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.02it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.56it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.55it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.54it/s]
+INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
+INFO:rag_system:✅ Indexed 149 documents from web3auth
+INFO:rag_system:🔍 Indexing chipi_pay documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.39it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.39it/s]
+INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
+INFO:rag_system:✅ Indexed 24 documents from chipi_pay
+INFO:rag_system:🔍 Indexing product_design documentation...
+WARNING:indexers:Skipped empty file: game_design.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.33it/s]
+INFO:indexers:Indexed 4 chunks from frontend_proposal.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.13it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.12it/s]
+INFO:indexers:Indexed 8 chunks from game_specs.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 23.94it/s]
+INFO:indexers:Indexed 2 chunks from bounty_requirements.md
+WARNING:indexers:Skipped empty file: user_archetypes.md
+INFO:rag_system:✅ Indexed 14 documents from product_design
+✅ Added batch 1/1
+INFO:     127.0.0.1:51783 - "POST /optimize HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:51792 - "POST /optimize HTTP/1.1" 200 OK
+ERROR:optimization_manager:Optimization failed: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+INFO:     127.0.0.1:51799 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51808 - "POST /index HTTP/1.1" 403 Forbidden

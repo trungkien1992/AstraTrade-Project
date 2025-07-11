@@ -18,14 +18,15 @@ from typing import Dict, Any
 from chromadb.utils import embedding_functions
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Request
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 # Local imports
-from config import RAG_CONFIG
+from config import RAG_CONFIG, settings
 from models import QueryRequest, QueryResponse, IndexRequest, IndexResponse, StatsResponse
 from rag_system import AstraTradeRAG
+from security import get_api_key
 
 # Enhanced categorization and indexing
 try:
@@ -91,9 +92,9 @@ async def root():
         "status": "running"
     }
 
-@app.post("/index", response_model=IndexResponse)
+@app.post("/index", response_model=IndexResponse, dependencies=[Depends(get_api_key)])
 async def index_documentation(request: IndexRequest, background_tasks: BackgroundTasks):
-    """Index SDK documentation"""
+    """Index SDK documentation - Requires API key"""
     background_tasks.add_task(rag_system.index_astratrade_documentation, request.force_reindex)
     return IndexResponse(
         status="started",
@@ -223,10 +224,10 @@ async def get_search_suggestions(query: str = ""):
     
     return {"suggestions": suggestions[:8]}
 
-@app.post("/optimize")
+@app.post("/optimize", dependencies=[Depends(get_api_key)])
 async def optimize_system(background_tasks: BackgroundTasks):
-    """Trigger system optimization"""
-    background_tasks.add_task(optimize_rag_system, rag_system.chroma_client, RAG_CONFIG["collection_name"])
+    """Trigger system optimization - Requires API key"""
+    background_tasks.add_task(optimize_rag_system, rag_system.chroma_client, settings.collection_name)
     return {"status": "optimization_started", "message": "System optimization running in background"}
 
 @app.get("/health/detailed")
