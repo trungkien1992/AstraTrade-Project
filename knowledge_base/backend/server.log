@@ -864,3 +864,186 @@ WARNING:indexers:Skipped empty file: user_archetypes.md
 INFO:rag_system:✅ Indexed 14 documents from product_design
 ✅ Added batch 1/1
 INFO:     127.0.0.1:52551 - "GET /stats HTTP/1.1" 200 OK
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [75537]
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Started server process [76424]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [76424]
+INFO:     Started server process [76453]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:     Started server process [76476]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:     Started server process [76496]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [76496]
+INFO:     Started server process [76523]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:watchfiles.main:3 changes detected
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:     Started server process [76555]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:watchfiles.main:3 changes detected
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'test_task_status.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [76555]
+INFO:     Started server process [76608]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+✅ Claude Code enhancements initialized
+INFO:     127.0.0.1:53005 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53010 - "GET /status/invalid-task-id-12345 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53011 - "POST /index HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53012 - "POST /optimize HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53013 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53014 - "GET /status/9abc8a2d-e93e-4cc9-9ea0-62a328df2b3b HTTP/1.1" 200 OK
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'test_task_flow.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [76608]
+INFO:     Started server process [76701]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+✅ Claude Code enhancements initialized
+INFO:     127.0.0.1:53047 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53056 - "GET /status/b5797225-a29e-4714-accc-fb60f0652366 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53058 - "GET /status/b5797225-a29e-4714-accc-fb60f0652366 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53059 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53060 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53061 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53062 - "GET /status/72591e96-2295-4b88-aee2-ae9a6ed3f771 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53063 - "GET /status/cc4bae06-d4f2-47ec-b849-f6c79485b6c2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53064 - "GET /status/6acbe118-15ce-43b3-a4ee-0eab54dd7d47 HTTP/1.1" 200 OK
+INFO:watchfiles.main:1 change detected
+WARNING:  WatchFiles detected changes in 'demo_task_status.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [76701]
+INFO:     Started server process [76805]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
+✅ Claude Code enhancements initialized
+INFO:     127.0.0.1:53096 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53107 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53112 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53113 - "GET /status/invalid-task-id HTTP/1.1" 404 Not Found

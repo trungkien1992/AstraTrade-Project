@@ -14,6 +14,7 @@ RAGFlow-inspired features:
 
 import time
 import logging
+import uuid
 from typing import Dict, Any
 from chromadb.utils import embedding_functions
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -71,6 +72,9 @@ code_chunker = None
 claude_search = None
 search_analytics = ClaudeSearchAnalytics()
 
+# Task management system for asynchronous operations
+tasks = {}
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize RAG system on startup"""
@@ -92,15 +96,23 @@ async def root():
         "status": "running"
     }
 
-@app.post("/index", response_model=IndexResponse, dependencies=[Depends(get_api_key)])
+@app.post("/index", response_model=Dict[str, Any], dependencies=[Depends(get_api_key)])
 async def index_documentation(request: IndexRequest, background_tasks: BackgroundTasks):
     """Index SDK documentation - Requires API key"""
-    background_tasks.add_task(rag_system.index_astratrade_documentation, request.force_reindex)
-    return IndexResponse(
-        status="started",
-        documents_indexed=0,
-        time_taken=0.0
-    )
+    task_id = str(uuid.uuid4())
+    tasks[task_id] = {
+        "status": "in_progress",
+        "start_time": time.time(),
+        "operation": "index_documentation",
+        "force_reindex": request.force_reindex
+    }
+    
+    background_tasks.add_task(run_index_task, task_id, request.force_reindex)
+    return {
+        "task_id": task_id,
+        "status": "started",
+        "message": "Indexing task started. Use /status/{task_id} to check progress."
+    }
 
 @app.post("/search", response_model=QueryResponse)
 async def search_knowledge_base(request: QueryRequest):
@@ -227,8 +239,19 @@ async def get_search_suggestions(query: str = ""):
 @app.post("/optimize", dependencies=[Depends(get_api_key)])
 async def optimize_system(background_tasks: BackgroundTasks):
     """Trigger system optimization - Requires API key"""
-    background_tasks.add_task(optimize_rag_system, rag_system.chroma_client, settings.collection_name)
-    return {"status": "optimization_started", "message": "System optimization running in background"}
+    task_id = str(uuid.uuid4())
+    tasks[task_id] = {
+        "status": "in_progress",
+        "start_time": time.time(),
+        "operation": "optimize_system"
+    }
+    
+    background_tasks.add_task(run_optimize_task, task_id)
+    return {
+        "task_id": task_id,
+        "status": "started",
+        "message": "Optimization task started. Use /status/{task_id} to check progress."
+    }
 
 @app.get("/health/detailed")
 async def get_detailed_health():
@@ -313,10 +336,18 @@ async def index_with_code_awareness(background_tasks: BackgroundTasks):
     if not code_chunker:
         raise HTTPException(status_code=503, detail="Code chunker not initialized")
     
-    background_tasks.add_task(reindex_with_code_aware_chunking)
+    task_id = str(uuid.uuid4())
+    tasks[task_id] = {
+        "status": "in_progress",
+        "start_time": time.time(),
+        "operation": "code_aware_indexing"
+    }
+    
+    background_tasks.add_task(run_code_aware_indexing_task, task_id)
     return {
+        "task_id": task_id,
         "status": "started", 
-        "message": "Code-aware indexing initiated",
+        "message": "Code-aware indexing initiated. Use /status/{task_id} to check progress.",
         "enhancement": "claude_code_chunking",
         "expected_improvements": [
             "4x larger chunk sizes",
@@ -388,7 +419,102 @@ async def suggest_files_for_query(request: QueryRequest):
         ]
     }
 
+@app.get("/status/{task_id}")
+async def get_task_status(task_id: str):
+    """Get the status of a background task"""
+    if task_id not in tasks:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    task = tasks[task_id]
+    response = {
+        "task_id": task_id,
+        "status": task["status"],
+        "operation": task["operation"],
+        "start_time": task["start_time"]
+    }
+    
+    if task["status"] == "completed":
+        response.update({
+            "end_time": task["end_time"],
+            "time_taken": task["time_taken"],
+            "result": task.get("result", {})
+        })
+        if "documents_indexed" in task:
+            response["documents_indexed"] = task["documents_indexed"]
+    
+    elif task["status"] == "failed":
+        response.update({
+            "end_time": task["end_time"],
+            "error": task["error"]
+        })
+    
+    return response
+
 # Background task functions
+
+async def run_index_task(task_id: str, force_reindex: bool):
+    """Background task for indexing with task status tracking"""
+    try:
+        start_time = time.time()
+        result = await rag_system.index_astratrade_documentation(force_reindex)
+        end_time = time.time()
+        
+        tasks[task_id].update({
+            "status": "completed",
+            "end_time": end_time,
+            "time_taken": end_time - start_time,
+            "documents_indexed": result.get("documents_indexed", 0),
+            "result": result
+        })
+        
+    except Exception as e:
+        tasks[task_id].update({
+            "status": "failed",
+            "end_time": time.time(),
+            "error": str(e)
+        })
+
+async def run_optimize_task(task_id: str):
+    """Background task for optimization with task status tracking"""
+    try:
+        start_time = time.time()
+        result = await optimize_rag_system(rag_system.chroma_client, settings.collection_name)
+        end_time = time.time()
+        
+        tasks[task_id].update({
+            "status": "completed",
+            "end_time": end_time,
+            "time_taken": end_time - start_time,
+            "result": result
+        })
+        
+    except Exception as e:
+        tasks[task_id].update({
+            "status": "failed",
+            "end_time": time.time(),
+            "error": str(e)
+        })
+
+async def run_code_aware_indexing_task(task_id: str):
+    """Background task for code-aware indexing with task status tracking"""
+    try:
+        start_time = time.time()
+        result = await reindex_with_code_aware_chunking()
+        end_time = time.time()
+        
+        tasks[task_id].update({
+            "status": "completed",
+            "end_time": end_time,
+            "time_taken": end_time - start_time,
+            "result": result
+        })
+        
+    except Exception as e:
+        tasks[task_id].update({
+            "status": "failed",
+            "end_time": time.time(),
+            "error": str(e)
+        })
 
 async def reindex_with_code_aware_chunking():
     """Background task to re-index the collection with code-aware chunking"""
