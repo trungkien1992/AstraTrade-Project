@@ -1047,3 +1047,16 @@ INFO:     127.0.0.1:53096 - "POST /index/code_aware HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53107 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53112 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53113 - "GET /status/invalid-task-id HTTP/1.1" 404 Not Found
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:watchfiles.main:1 change detected
+INFO:     127.0.0.1:53430 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53458 - "POST /index/code_aware HTTP/1.1" 200 OK
+🔄 Starting code-aware re-indexing...
+❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
+INFO:     127.0.0.1:53465 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53505 - "GET /claude/status HTTP/1.1" 200 OK
