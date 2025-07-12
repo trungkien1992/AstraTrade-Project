@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PulsatingButton extends StatefulWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color? color;
   final bool isLoading;
   

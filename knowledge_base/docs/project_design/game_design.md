@@ -20,7 +20,7 @@ The two-tier currency system remains, but its interaction with the planet's grow
 
 #### **Mock Trades (Free-to-Play Layer) - "Orbital Forging"**
 
-* **Resource Generated: Stellar Shards (SS)** – Renamed "Trade Tokens" to be more thematic. The primary, abundant in-game currency.
+* **Resource Generated: Stellar Shards (SS)**  The primary, abundant in-game currency.
 * **Function:** SS is generated from every "Orbital Forging" action (manual taps on a glowing planet core, automated by "Astro-Forgers" - our new name for bots). SS is used for the *fundamental, tangible expansion* of your planet:
     * **Terraforming Blocks:** Unlocks new landmasses and biomes.
     * **Astro-Forgers (Bots):** Purchase and upgrade these to automate SS generation. They visually orbit your planet, their efficiency directly tied to your "planet health" and upgrades.
@@ -33,7 +33,7 @@ The two-tier currency system remains, but its interaction with the planet's grow
 
 #### **Real Trades (Pro Trader Layer) - "Quantum Harvesting"**
 
-* **Resource Generated: Lumina (LM)** – Renamed "Astra-Dust" to evoke light and energy. The premium, highly sought-after progression resource.
+* **Resource Generated: Lumina (LM)** – The premium, highly sought-after progression resource.
 * **Function:** LM is **exclusively "harvested" from real-money trades**. The formula (PnL, volume, streaks) is now abstracted into "Quantum Harvest Efficiency." LM is the **catalyst for your planet's TRUE cosmic evolution and unlocking its latent "Cosmic Genesis" powers.**
 
 ---

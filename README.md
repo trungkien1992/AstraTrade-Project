@@ -39,6 +39,36 @@ astratrade_app/
 └── 📁 platform/               # Platform-specific configurations
 ```
 
+## 🔍 Code Review & Development Tools
+
+### GitIngest Scripts
+
+The project includes powerful scripts for code review and development tracking:
+
+```bash
+# Interactive menu for all review options
+python gitingest_scripts/review_menu.py
+
+# Quick session review (last 2 hours)
+python gitingest_scripts/run_session_review.py
+
+# Advanced code review with custom options
+python gitingest_scripts/run_latest_code_review.py --since 8
+
+# Full repository digest
+python gitingest_scripts/run_ingest.py
+```
+
+**Key Features:**
+- 🚀 **Session Reviews**: Track changes in current working session
+- 📅 **Time-based Analysis**: Custom time windows for change tracking
+- 📋 **Staged File Reviews**: Review files ready for commit
+- 🌿 **Branch Comparisons**: Compare against main/develop branches
+- 📊 **Multiple Formats**: Markdown, JSON, and plain text outputs
+- ⚡ **Smart Filtering**: Focus on important code files only
+
+See [`gitingest_scripts/README.md`](gitingest_scripts/README.md) for detailed documentation.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -292,14 +322,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Riverpod** for excellent state management
 - **Open Source Community** for countless helpful packages
 
-## 📞 Support
 
-- **Documentation**: [Project Wiki](https://github.com/your-org/astratrade-project/wiki)
-- **Issues**: [GitHub Issues](https://github.com/your-org/astratrade-project/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/astratrade-project/discussions)
-- **Email**: support@astratrade.io
-
----
 
 <div align="center">
 
@@ -308,3 +331,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [Website](https://astratrade.io) • [Documentation](https://docs.astratrade.io) • [Twitter](https://twitter.com/astratrade)
 
 </div>
+
+## Repository Ingestion for AI/LLM
+
+We use [GitIngest](https://github.com/cyclotruc/gitingest) to preprocess and summarize the codebase for AI workflows.
+
+### Usage
+
+- **CLI**: `gitingest https://github.com/trungkien1992/AstraTrade-Project -o digest.txt`
+- **Python**: See `gitingest_scripts/run_ingest.py`
+
+This will generate a `digest.txt` file containing a summary, directory tree, and the contents of all Python and Markdown files (up to 100KB each) in the repository, formatted for LLM processing.

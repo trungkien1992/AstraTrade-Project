@@ -1312,3 +1312,29 @@ INFO:     Application startup complete.
 INFO:     127.0.0.1:56501 - "POST /search HTTP/1.1" 200 OK
 Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 58.26it/s]
 INFO:     127.0.0.1:56516 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.97it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.96it/s]
+INFO:     127.0.0.1:58342 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 30.39it/s]
+INFO:     127.0.0.1:58357 - "POST /search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58372 - "GET /health HTTP/1.1" 404 Not Found
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.90it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.90it/s]
+INFO:     127.0.0.1:58428 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.14it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.13it/s]
+INFO:     127.0.0.1:63851 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 54.96it/s]
+INFO:     127.0.0.1:63865 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 46.17it/s]
+INFO:     127.0.0.1:63879 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.45it/s]
+INFO:     127.0.0.1:63885 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.58it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.58it/s]
+INFO:     127.0.0.1:65500 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 67.49it/s]
+INFO:     127.0.0.1:65512 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.94it/s]
+INFO:     127.0.0.1:65515 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 87.51it/s]
+INFO:     127.0.0.1:65518 - "POST /search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65532 - "GET /health HTTP/1.1" 404 Not Found
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 64.70it/s]
+INFO:     127.0.0.1:49156 - "POST /search HTTP/1.1" 200 OK
