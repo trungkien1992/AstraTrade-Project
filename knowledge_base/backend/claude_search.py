@@ -285,6 +285,23 @@ class ClaudeOptimizedSearch:
         """Expand context based on development patterns and relationships"""
         expanded = base_results.copy()
         
+        # Extract primary code chunks for expansion
+        code_chunks = [r for r in base_results[:5] if r.get('chunk_type') in ['function', 'class', 'component']]
+        
+        # Intent-based context expansion
+        if intent in ['feature', 'refactor']:
+            # Automatically search for related test files
+            for result in code_chunks:
+                file_path = result.get('file_path', '')
+                if file_path:
+                    test_files = await self._find_related_test_files(file_path)
+                    expanded.extend(test_files)
+        
+        elif intent == 'debug':
+            # Automatically pull in related documentation on error handling or troubleshooting
+            debug_docs = await self._find_debug_documentation(keywords)
+            expanded.extend(debug_docs)
+        
         # For each result, find related development context
         for result in base_results[:5]:  # Limit expansion to top results
             file_path = result.get('file_path', '')
@@ -353,6 +370,73 @@ class ClaudeOptimizedSearch:
             ])
         
         return list(set(related_files))  # Remove duplicates
+    
+    async def _find_related_test_files(self, file_path: str) -> List[Dict]:
+        """Find test files related to the given file path"""
+        test_results = []
+        
+        if not file_path:
+            return test_results
+        
+        # Extract base name and construct potential test file patterns
+        base_name = Path(file_path).stem
+        file_dir = str(Path(file_path).parent)
+        
+        # Common test file patterns
+        test_patterns = [
+            f"{base_name}_test.py",
+            f"{base_name}_test.dart", 
+            f"test_{base_name}.py",
+            f"{base_name}.test.dart",
+            f"{base_name}.spec.dart"
+        ]
+        
+        # Search for test files using multiple strategies
+        for pattern in test_patterns:
+            # Strategy 1: Direct file pattern search
+            test_query = f"file:{pattern} OR title:{pattern}"
+            test_search_results = await self._semantic_search(test_query, max_results=3)
+            test_results.extend(test_search_results)
+            
+            # Strategy 2: Content-based search for tests mentioning the file
+            content_query = f"test {base_name} unittest spec"
+            content_results = await self._semantic_search(content_query, max_results=2)
+            # Filter for actual test files
+            test_content = [r for r in content_results if any(
+                test_keyword in r.get('file_path', '').lower() 
+                for test_keyword in ['test', 'spec']
+            )]
+            test_results.extend(test_content)
+        
+        return test_results[:5]  # Limit to 5 test files
+    
+    async def _find_debug_documentation(self, keywords: List[str]) -> List[Dict]:
+        """Find documentation related to debugging and error handling"""
+        debug_results = []
+        
+        # Build debug-specific query
+        debug_terms = ['error', 'exception', 'troubleshoot', 'debug', 'logging', 'validation']
+        keyword_terms = ' '.join(keywords[:3])  # Use top 3 keywords
+        
+        debug_queries = [
+            f"error handling {keyword_terms} troubleshooting",
+            f"debugging {keyword_terms} exception",
+            f"logging {keyword_terms} validation",
+            "error handling best practices",
+            "debugging guide troubleshooting"
+        ]
+        
+        for query in debug_queries:
+            results = await self._semantic_search(query, max_results=2)
+            # Filter for documentation-type content
+            doc_results = [r for r in results if any(
+                doc_indicator in r.get('category', '').lower() or 
+                doc_indicator in r.get('title', '').lower()
+                for doc_indicator in ['doc', 'guide', 'readme', 'help', 'manual']
+            )]
+            debug_results.extend(doc_results)
+        
+        return debug_results[:4]  # Limit to 4 debug docs
     
     async def _get_file_context(self, file_path: str, intent: str) -> List[Dict]:
         """Get context for a specific file"""
@@ -624,22 +708,71 @@ class ClaudeOptimizedSearch:
         
         for i, result in enumerate(results):
             metadata = result.get('metadata', {})
+            content = result.get('content', '')
             
-            # Create citation with source attribution
+            # Extract accurate line information from metadata or content
+            start_line = metadata.get('start_line', 0)
+            end_line = metadata.get('end_line', 0)
+            
+            # If line numbers not in metadata, try to estimate from content
+            if start_line == 0 and end_line == 0 and content:
+                # Count lines in content for estimated range
+                line_count = content.count('\n') + 1
+                start_line = metadata.get('line_start', 1)  # Try alternative metadata keys
+                end_line = start_line + line_count - 1 if start_line > 0 else line_count
+            
+            # Generate unique source ID
+            timestamp_hash = hashlib.md5(f"{query}_{i}_{metadata.get('file_path', '')}".encode()).hexdigest()[:8]
+            
+            # Create citation with accurate source attribution
             citation = Citation(
-                source_id=f"cite_{i}_{hashlib.md5(query.encode()).hexdigest()[:8]}",
-                chunk_id=metadata.get('chunk_id', f"chunk_{i}"),
-                file_path=metadata.get('file_path', 'unknown'),
-                start_line=metadata.get('start_line', 0),
-                end_line=metadata.get('end_line', 0),
-                confidence=result.get('similarity', 0.0),
-                context_snippet=result.get('content', '')[:200] + '...',
-                source_url=metadata.get('source_url')
+                source_id=f"cite_{timestamp_hash}",
+                chunk_id=metadata.get('chunk_id', metadata.get('id', f"chunk_{i}")),
+                file_path=metadata.get('file_path', result.get('file_path', 'unknown')),
+                start_line=int(start_line) if start_line else 0,
+                end_line=int(end_line) if end_line else 0,
+                confidence=float(result.get('similarity', 0.0)),
+                context_snippet=self._create_context_snippet(content),
+                source_url=metadata.get('source_url', metadata.get('url'))
             )
             
-            citations.append(citation)
+            # Only add citations with meaningful information
+            if citation.file_path != 'unknown' and citation.confidence >= 0.1:
+                citations.append(citation)
         
         return citations
+    
+    def _create_context_snippet(self, content: str) -> str:
+        """Create a meaningful context snippet from content"""
+        if not content:
+            return "..."
+        
+        # Clean and truncate content
+        cleaned_content = content.strip()
+        
+        # If content is short, return as-is
+        if len(cleaned_content) <= 200:
+            return cleaned_content
+        
+        # Find a good breaking point (end of sentence, line, or word)
+        snippet = cleaned_content[:200]
+        
+        # Try to break at end of line
+        last_newline = snippet.rfind('\n')
+        if last_newline > 100:
+            return snippet[:last_newline] + '...'
+        
+        # Try to break at end of sentence
+        last_period = snippet.rfind('.')
+        if last_period > 100:
+            return snippet[:last_period + 1] + '...'
+        
+        # Break at last word boundary
+        last_space = snippet.rfind(' ')
+        if last_space > 100:
+            return snippet[:last_space] + '...'
+        
+        return snippet + '...'
     
     def _calculate_confidence_score(self, results: List[Dict], citations: List[Citation]) -> float:
         """Calculate overall confidence score for search results"""

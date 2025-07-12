@@ -2,20 +2,25 @@
 """
 Citations Accuracy Testing
 Test grounded citations and source attribution reliability
+Enhanced to test ClaudeOptimizedSearch citation generation
 """
 
 import json
 import logging
 import time
+import asyncio
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from pathlib import Path
 import statistics
 import sys
 import os
+from unittest.mock import Mock, AsyncMock
 
 # Add current directory to Python path
 sys.path.insert(0, '/Users/admin/AstraTrade-Project/knowledge_base/backend')
+
+from claude_search import ClaudeOptimizedSearch, Citation
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -547,9 +552,199 @@ class CitationAccuracyTester:
         logger.info(f"Citation results saved to {output_path}")
         return output_path
 
+class TestClaudeSearchCitations:
+    """Test ClaudeOptimizedSearch citation generation functionality"""
+    
+    def setup_mock_collection(self):
+        """Create a mock collection for testing"""
+        mock_collection = Mock()
+        
+        # Mock collection query results
+        mock_collection.query.return_value = {
+            "documents": [[
+                "def calculate_profit(price, cost):\n    return price - cost",
+                "class TradingBot:\n    def __init__(self):\n        self.active = True",
+                "# Test file for trading calculations\ndef test_calculate_profit():\n    assert calculate_profit(100, 80) == 20"
+            ]],
+            "metadatas": [[
+                {
+                    "file_path": "lib/services/trading_service.py",
+                    "start_line": 45,
+                    "end_line": 46,
+                    "chunk_id": "chunk_001",
+                    "chunk_type": "function",
+                    "title": "calculate_profit function"
+                },
+                {
+                    "file_path": "lib/models/trading_bot.py", 
+                    "start_line": 12,
+                    "end_line": 15,
+                    "chunk_id": "chunk_002",
+                    "chunk_type": "class",
+                    "title": "TradingBot class"
+                },
+                {
+                    "file_path": "test/unit/trading_service_test.py",
+                    "start_line": 1,
+                    "end_line": 4,
+                    "chunk_id": "chunk_003", 
+                    "chunk_type": "test",
+                    "title": "test_calculate_profit"
+                }
+            ]],
+            "distances": [[0.2, 0.3, 0.4]]
+        }
+        
+        return mock_collection
+    
+    async def test_search_returns_non_empty_citations(self):
+        """Test that search returns non-empty citations array"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search
+        result = await claude_search.search_for_claude("calculate profit function")
+        
+        # Verify citations exist
+        assert result.citations is not None
+        assert len(result.citations) > 0
+        assert isinstance(result.citations[0], Citation)
+        print(f"✓ Search returned {len(result.citations)} citations")
+    
+    async def test_citation_metadata_accuracy(self):
+        """Test that citation objects contain accurate metadata"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search
+        result = await claude_search.search_for_claude("trading bot class")
+        
+        # Get first citation
+        citation = result.citations[0]
+        
+        # Verify citation structure
+        assert citation.source_id is not None
+        assert citation.chunk_id is not None
+        assert citation.file_path != 'unknown'
+        assert citation.start_line >= 0
+        assert citation.end_line >= citation.start_line
+        assert 0.0 <= citation.confidence <= 1.0
+        assert citation.context_snippet is not None
+        assert len(citation.context_snippet) > 0
+        print(f"✓ Citation metadata validation passed for file: {citation.file_path}")
+    
+    async def test_citation_file_path_accuracy(self):
+        """Test that file_path in citations matches source chunk metadata"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search
+        result = await claude_search.search_for_claude("calculate profit")
+        
+        # Check that citation file paths match expected patterns
+        file_paths = [citation.file_path for citation in result.citations]
+        
+        # Should contain the trading service file
+        assert any('trading_service.py' in path for path in file_paths)
+        
+        # Verify file paths are realistic
+        for path in file_paths:
+            assert path != 'unknown'
+            assert '/' in path or '\\' in path  # Should be a file path
+        print(f"✓ File path accuracy validated: {file_paths}")
+    
+    async def test_citation_line_numbers(self):
+        """Test that start_line and end_line are properly populated"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search  
+        result = await claude_search.search_for_claude("trading bot")
+        
+        for citation in result.citations:
+            # Line numbers should be meaningful
+            assert citation.start_line >= 0
+            assert citation.end_line >= citation.start_line
+            
+            # If we have actual line numbers, they should be reasonable
+            if citation.start_line > 0:
+                assert citation.start_line < 10000  # Reasonable upper bound
+                assert citation.end_line < 10000
+        print(f"✓ Line number validation passed for {len(result.citations)} citations")
+    
+    async def test_multiple_citations_per_search(self):
+        """Test that searches can return multiple citations"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search that should return multiple results
+        result = await claude_search.search_for_claude("trading bot profit")
+        
+        # Should have multiple citations for comprehensive results
+        assert len(result.citations) >= 2
+        
+        # Citations should have unique source IDs
+        source_ids = [citation.source_id for citation in result.citations]
+        assert len(source_ids) == len(set(source_ids))  # All unique
+        print(f"✓ Multiple citations test passed: {len(result.citations)} citations with unique IDs")
+    
+    async def test_citation_quality_filtering(self):
+        """Test that low-quality citations are filtered out"""
+        mock_rag = Mock()
+        mock_collection = self.setup_mock_collection()
+        claude_search = ClaudeOptimizedSearch(mock_rag, mock_collection)
+        
+        # Perform search
+        result = await claude_search.search_for_claude("test query")
+        
+        # All returned citations should meet minimum quality standards
+        for citation in result.citations:
+            assert citation.file_path != 'unknown'
+            assert citation.confidence >= 0.1  # Minimum confidence threshold
+            assert len(citation.context_snippet.strip()) > 0
+        print(f"✓ Citation quality filtering validated for {len(result.citations)} citations")
+
+async def run_claude_search_citation_tests():
+    """Run all ClaudeOptimizedSearch citation tests"""
+    print("\n" + "="*80)
+    print("CLAUDE SEARCH CITATION GENERATION TESTS")
+    print("="*80)
+    
+    test_class = TestClaudeSearchCitations()
+    
+    tests = [
+        test_class.test_search_returns_non_empty_citations,
+        test_class.test_citation_metadata_accuracy,
+        test_class.test_citation_file_path_accuracy,
+        test_class.test_citation_line_numbers,
+        test_class.test_multiple_citations_per_search,
+        test_class.test_citation_quality_filtering
+    ]
+    
+    passed = 0
+    failed = 0
+    
+    for test in tests:
+        try:
+            await test()
+            passed += 1
+        except Exception as e:
+            print(f"✗ {test.__name__} failed: {e}")
+            failed += 1
+    
+    print(f"\nCitation generation tests completed: {passed} passed, {failed} failed")
+    return failed == 0
+
 def main():
     """Main citation testing function"""
     
+    # Run static citation accuracy tests
+    print("Running static citation accuracy tests...")
     tester = CitationAccuracyTester()
     
     try:
@@ -561,7 +756,7 @@ def main():
         
         # Print summary
         print("\n" + "="*80)
-        print("CITATION ACCURACY TEST RESULTS")
+        print("STATIC CITATION ACCURACY TEST RESULTS")
         print("="*80)
         
         overall = results["overall_summary"]
@@ -595,12 +790,25 @@ def main():
         
         print(f"\nDetailed results saved to: {output_file}")
         
-        # Return success if overall metrics are good
-        return overall['avg_f1_score'] > 0.3 and overall['success_rate'] > 0.8
+        static_success = overall['avg_f1_score'] > 0.3 and overall['success_rate'] > 0.8
         
     except Exception as e:
-        logger.error(f"Citation testing failed: {e}")
-        return False
+        logger.error(f"Static citation testing failed: {e}")
+        static_success = False
+    
+    # Run dynamic citation generation tests
+    print("\nRunning dynamic citation generation tests...")
+    try:
+        citation_success = asyncio.run(run_claude_search_citation_tests())
+    except Exception as e:
+        logger.error(f"Citation generation testing failed: {e}")
+        citation_success = False
+    
+    # Overall success
+    overall_success = static_success and citation_success
+    print(f"\nOverall citation testing result: {'PASSED' if overall_success else 'FAILED'}")
+    
+    return overall_success
 
 if __name__ == "__main__":
     success = main()

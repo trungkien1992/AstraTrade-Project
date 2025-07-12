@@ -419,6 +419,104 @@ async def main():
         logger.error(f"Testing failed: {e}")
         return False
 
+async def test_context_expansion_feature_intent():
+    """Test that feature intent returns context from both implementation and test files"""
+    print("\n" + "="*80)
+    print("CONTEXT EXPANSION TEST - FEATURE INTENT")
+    print("="*80)
+    
+    try:
+        # Initialize RAG system
+        rag_system = AstraTradeRAG()
+        await rag_system.initialize()
+        
+        # Get the ClaudeOptimizedSearch instance
+        claude_search = rag_system.claude_search
+        
+        # Test query with feature intent (should trigger context expansion)
+        feature_query = "implement new trading functionality"
+        
+        # Perform search with feature intent
+        result = await claude_search.search_for_claude(feature_query, context_type="development")
+        
+        # Verify context expansion occurred
+        file_paths = [r.get('file_path', '') for r in result.results if r.get('file_path')]
+        unique_files = set(file_paths)
+        
+        print(f"Query: {feature_query}")
+        print(f"Intent detected: {result.query_type}")
+        print(f"Total results: {len(result.results)}")
+        print(f"Unique files referenced: {len(unique_files)}")
+        print(f"Files found: {list(unique_files)[:5]}")  # Show first 5 files
+        
+        # Check if we have both implementation and test files
+        implementation_files = [f for f in file_paths if not any(test_indicator in f.lower() for test_indicator in ['test', 'spec'])]
+        test_files = [f for f in file_paths if any(test_indicator in f.lower() for test_indicator in ['test', 'spec'])]
+        
+        print(f"Implementation files: {len(implementation_files)}")
+        print(f"Test files: {len(test_files)}")
+        
+        # Verify citations are generated
+        print(f"Citations generated: {len(result.citations)}")
+        
+        # Success criteria:
+        # 1. Should detect 'feature' intent
+        # 2. Should return multiple files (context expansion)
+        # 3. Should include both implementation and test files
+        # 4. Should have citations
+        
+        success = (
+            result.query_type == 'feature' and
+            len(unique_files) >= 2 and
+            len(test_files) > 0 and
+            len(result.citations) > 0
+        )
+        
+        print(f"\nContext expansion test result: {'PASSED' if success else 'FAILED'}")
+        
+        if success:
+            print("✓ Feature intent correctly detected")
+            print("✓ Multiple files returned (context expansion working)")
+            print("✓ Test files included in expansion")
+            print("✓ Citations generated")
+        else:
+            print("✗ Context expansion test failed:")
+            if result.query_type != 'feature':
+                print(f"  - Expected 'feature' intent, got '{result.query_type}'")
+            if len(unique_files) < 2:
+                print(f"  - Expected multiple files, got {len(unique_files)}")
+            if len(test_files) == 0:
+                print("  - No test files found in expansion")
+            if len(result.citations) == 0:
+                print("  - No citations generated")
+        
+        return success
+        
+    except Exception as e:
+        logger.error(f"Context expansion test failed: {e}")
+        print(f"✗ Context expansion test failed with error: {e}")
+        return False
+
+async def run_all_enhanced_tests():
+    """Run all enhanced RAG tests including context expansion"""
+    print("Running comprehensive RAG system tests...")
+    
+    # Run main tests
+    main_test_success = await main()
+    
+    # Run context expansion test
+    context_test_success = await test_context_expansion_feature_intent()
+    
+    overall_success = main_test_success and context_test_success
+    
+    print("\n" + "="*80)
+    print(f"OVERALL TEST RESULTS: {'PASSED' if overall_success else 'FAILED'}")
+    print("="*80)
+    print(f"Main RAG tests: {'PASSED' if main_test_success else 'FAILED'}")
+    print(f"Context expansion test: {'PASSED' if context_test_success else 'FAILED'}")
+    
+    return overall_success
+
 if __name__ == "__main__":
-    success = asyncio.run(main())
+    success = asyncio.run(run_all_enhanced_tests())
     exit(0 if success else 1)
