@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../utils/constants.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -89,9 +91,9 @@ class _SplashScreenState extends State<SplashScreen>
               
               // App Name
               Text(
-                'AstraTrade',
+                AppConstants.appName,
                 style: GoogleFonts.orbitron(
-                  fontSize: 32,
+                  fontSize: AppConstants.titleFontSize,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   letterSpacing: 2,
@@ -101,9 +103,9 @@ class _SplashScreenState extends State<SplashScreen>
               
               // Tagline
               Text(
-                'Advanced Trading Platform',
+                AppConstants.appTagline,
                 style: GoogleFonts.rajdhani(
-                  fontSize: 16,
+                  fontSize: AppConstants.bodyFontSize,
                   color: Colors.grey.shade400,
                   letterSpacing: 1,
                 ),

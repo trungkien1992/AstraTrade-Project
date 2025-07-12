@@ -19,14 +19,16 @@ void main() {
     // Verify that the app initializes without crashing
     expect(find.byType(MaterialApp), findsOneWidget);
     
-    // Allow animations to settle
-    await tester.pump();
-    
-    // Verify basic splash screen elements
+    // Verify basic splash screen elements are present initially
     expect(find.text('AstraTrade'), findsOneWidget);
     expect(find.text('Advanced Trading Platform'), findsOneWidget);
-    
-    // Verify that the splash screen loads
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    
+    // Verify app doesn't crash during initialization
+    await tester.pump();
+    expect(find.byType(MaterialApp), findsOneWidget);
+    
+    // Wait for splash timer to complete to avoid pending timer error
+    await tester.pump(const Duration(seconds: 4));
   });
 }

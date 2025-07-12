@@ -1307,3 +1307,8 @@ INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
 INFO:rag_system:📊 Current documents in collection: 583
 INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
 INFO:     Application startup complete.
+✅ Claude Code enhancements initialized
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.22it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.22it/s]
+INFO:     127.0.0.1:56501 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 58.26it/s]
+INFO:     127.0.0.1:56516 - "POST /search HTTP/1.1" 200 OK

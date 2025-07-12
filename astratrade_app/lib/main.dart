@@ -4,6 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'screens/splash_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/main_hub_screen.dart';
+import 'providers/auth_provider.dart';
+import 'utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,16 +22,16 @@ void main() async {
   );
 }
 
-class AstraTradeApp extends StatelessWidget {
+class AstraTradeApp extends ConsumerWidget {
   const AstraTradeApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'AstraTrade',
+      title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
-      home: const SplashScreen(),
+      home: const AuthNavigator(),
     );
   }
 
@@ -70,6 +74,52 @@ class AstraTradeApp extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
+    );
+  }
+}
+
+/// Handles navigation based on authentication state
+class AuthNavigator extends ConsumerStatefulWidget {
+  const AuthNavigator({super.key});
+
+  @override
+  ConsumerState<AuthNavigator> createState() => _AuthNavigatorState();
+}
+
+class _AuthNavigatorState extends ConsumerState<AuthNavigator> {
+  bool _showSplash = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // Show splash screen for configured duration
+    Future.delayed(const Duration(seconds: AppConstants.splashDurationSeconds), () {
+      if (mounted) {
+        setState(() {
+          _showSplash = false;
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_showSplash) {
+      return const SplashScreen();
+    }
+
+    final authState = ref.watch(authProvider);
+
+    return authState.when(
+      loading: () => const SplashScreen(), // Show splash while checking auth
+      error: (error, stack) => const LoginScreen(), // Show login on error
+      data: (user) {
+        if (user != null) {
+          return const MainHubScreen(); // User is authenticated
+        } else {
+          return const LoginScreen(); // User needs to authenticate
+        }
+      },
     );
   }
 }

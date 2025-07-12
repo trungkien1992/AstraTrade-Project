@@ -1,530 +1,310 @@
-# AstraTrade Knowledge Base & RAG System v1.0.0
+# 🚀 AstraTrade - Advanced Web3 Trading Platform
 
-A sophisticated Retrieval-Augmented Generation (RAG) system designed for multi-platform trading and blockchain development. Built with advanced code-aware chunking, intelligent categorization, and grounded citations for Claude Code integration.
+[![Flutter](https://img.shields.io/badge/Flutter-3.32.5-blue.svg)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-3.8.0-blue.svg)](https://dart.dev/)
+[![Web3Auth](https://img.shields.io/badge/Web3Auth-6.2.0-green.svg)](https://web3auth.io/)
+[![Starknet](https://img.shields.io/badge/Starknet-Ready-orange.svg)](https://starknet.io/)
 
-## 🚀 Quick Start with Docker
+AstraTrade is a cutting-edge Web3 trading platform that combines seamless social authentication with powerful blockchain technology. Built with Flutter for cross-platform compatibility and integrated with Starknet for efficient trading operations.
 
-The entire system can be started with a single command:
+## 🌟 Features
 
-```bash
-cd knowledge_base/backend
-docker compose up
+### ✅ Implemented (v1.0.0)
+- **🔐 Web3Auth Integration**: Seamless Google OAuth login with automatic wallet creation
+- **🎨 Modern UI**: Cyberpunk-themed interface with Material Design 3
+- **📱 Cross-Platform**: Native iOS, Android, Web, Desktop support
+- **🔗 Starknet Ready**: Blockchain integration foundation with account management
+- **🏗️ Clean Architecture**: Modular design with Riverpod state management
+- **🧪 RAG System**: AI-powered knowledge base for development assistance
+
+### 🚧 In Development
+- **📊 Portfolio Analytics**: Real-time trading insights and performance metrics
+- **💱 Advanced Trading**: Limit orders, stop-loss, and algorithmic trading
+- **🔒 Enhanced Security**: Multi-factor authentication and hardware wallet support
+- **📈 Market Data**: Live price feeds and technical analysis tools
+
+## 🏗️ Architecture
+
+```
+astratrade_app/
+├── 📁 lib/
+│   ├── 🔌 api/                 # External API clients
+│   ├── 📊 models/              # Data models with JSON serialization
+│   ├── 🔄 providers/           # Riverpod state management
+│   ├── 📺 screens/             # UI screens and pages
+│   ├── ⚙️ services/            # Business logic and external integrations
+│   ├── 🛠️ utils/               # Utility functions and constants
+│   └── 🎨 widgets/             # Reusable UI components
+├── 📁 knowledge_base/          # RAG system for AI assistance
+└── 📁 platform/               # Platform-specific configurations
 ```
 
-This will start:
-- **Backend API** on `http://localhost:8000`
-- **ChromaDB** on `http://localhost:8001`
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Docker Desktop installed and running
-- Git (for cloning the repository)
+- **Flutter SDK**: 3.32.5 or higher
+- **Dart SDK**: 3.8.0 or higher
+- **iOS Development**: Xcode 14+ (for iOS builds)
+- **Android Development**: Android Studio with API 26+ support
 
-## 📋 System Overview
-
-### Architecture
-
-```
-AstraTrade RAG System
-├── FastAPI Backend (Port 8000)
-│   ├── Advanced ClaudeOptimizedSearch
-│   ├── Code-Aware Chunking
-│   ├── Multi-Platform Categorization
-│   ├── Asynchronous Task Management
-│   └── Grounded Citations
-├── ChromaDB Vector Store (Port 8001)
-│   ├── Persistent Data Storage
-│   └── Semantic Search Engine
-└── Knowledge Base
-    ├── Extended Exchange API Docs
-    ├── Starknet/Cairo Documentation
-    ├── X10 Python SDK
-    ├── Web3Auth Integration
-    └── Trading & Blockchain Guides
-```
-
-### Key Features
-
-- **🧠 Intelligent Search**: Claude-optimized search with intent detection and context expansion
-- **📝 Code-Aware Processing**: Advanced chunking that preserves code structure and relationships
-- **🔗 Grounded Citations**: Source attribution with file paths and line numbers
-- **⚡ High Performance**: ~20ms average query response time
-- **🌐 Multi-Platform Support**: Covers trading APIs, blockchain SDKs, and development tools
-- **🔄 Async Task Management**: Background processing with real-time status tracking
-- **🐳 Docker Ready**: Complete containerization with persistent data
-
-## 🛠 Installation & Setup
-
-### Option 1: Docker (Recommended)
+### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd AstraTrade-Project
+   git clone https://github.com/your-org/astratrade-project.git
+   cd AstraTrade-Project/astratrade_app
    ```
 
-2. **Start the system**
+2. **Install dependencies**
    ```bash
-   cd knowledge_base/backend
-   docker compose up
+   flutter pub get
+   dart run build_runner build
    ```
 
-3. **Verify installation**
+3. **Configure Web3Auth** (Required for authentication)
    ```bash
-   curl http://localhost:8000/
-   # Should return: {"message": "AstraTrade RAG System API", "version": "1.0.0"}
+   # Get your client ID from https://dashboard.web3auth.io
+   # Update lib/services/auth_service.dart:
+   # Replace 'YOUR_WEB3AUTH_CLIENT_ID' with your actual client ID
    ```
 
-### Option 2: Local Development
-
-1. **Install dependencies**
+4. **Run the application**
    ```bash
-   cd knowledge_base/backend
-   pip install -r requirements.txt
+   flutter run
    ```
 
-2. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+## ⚙️ Configuration
+
+### Web3Auth Setup
+
+1. **Create Web3Auth Account**
+   - Visit [Web3Auth Dashboard](https://dashboard.web3auth.io)
+   - Create a new project
+   - Note your Client ID
+
+2. **Configure Redirect URLs**
+   
+   **iOS (`ios/Runner/Info.plist`):**
+   ```xml
+   <key>CFBundleURLTypes</key>
+   <array>
+     <dict>
+       <key>CFBundleURLName</key>
+       <string>astratrade.auth</string>
+       <key>CFBundleURLSchemes</key>
+       <array>
+         <string>astratrade</string>
+       </array>
+     </dict>
+   </array>
    ```
 
-3. **Start ChromaDB**
-   ```bash
-   docker run -p 8001:8000 chromadb/chroma:latest
+   **Android (`android/app/src/main/AndroidManifest.xml`):**
+   ```xml
+   <activity
+       android:name=".MainActivity"
+       android:exported="true"
+       android:launchMode="singleTop"
+       android:theme="@style/LaunchTheme">
+       <intent-filter android:autoVerify="true">
+           <action android:name="android.intent.action.VIEW" />
+           <category android:name="android.intent.category.DEFAULT" />
+           <category android:name="android.intent.category.BROWSABLE" />
+           <data android:scheme="astratrade" />
+       </intent-filter>
+   </activity>
    ```
 
-4. **Start the backend**
-   ```bash
-   python main.py
+3. **Update Configuration**
+   ```dart
+   // lib/services/auth_service.dart
+   static const String _clientId = 'YOUR_ACTUAL_CLIENT_ID';
    ```
 
-## 📚 API Documentation
+### RAG System (Optional Development Aid)
 
-### Core Endpoints
-
-#### Health & Status
+The project includes an AI-powered knowledge base for development assistance:
 
 ```bash
-# Health check
-GET /
-# Response: {"message": "AstraTrade RAG System API", "version": "1.0.0"}
-
-# System status
-GET /status
-# Response: Detailed system configuration and performance metrics
-
-# Collection statistics
-GET /stats
-# Response: Knowledge base statistics and indexing status
-```
-
-#### Search Endpoints
-
-```bash
-# Basic semantic search
-POST /search
-Content-Type: application/json
-{
-  "query": "How to place orders on Extended Exchange?",
-  "max_results": 10,
-  "min_similarity": 0.7
-}
-
-# Claude-optimized search with context expansion
-POST /search/claude
-Content-Type: application/json
-{
-  "query": "implement trading bot functionality", 
-  "context_type": "development",
-  "max_context_size": 8000
-}
-```
-
-#### Asynchronous Task Management
-
-```bash
-# Start background indexing
-POST /index/async
-Content-Type: application/json
-{
-  "force_reindex": false,
-  "chunk_size": 4000
-}
-# Response: {"task_id": "uuid-string"}
-
-# Check task status
-GET /status/{task_id}
-# Response: {"status": "completed", "progress": 100, "result": {...}}
-
-# List all tasks
-GET /tasks
-# Response: Array of all task statuses
-```
-
-#### Content Management
-
-```bash
-# Add new document
-POST /documents
-Content-Type: application/json
-{
-  "content": "Document content here...",
-  "title": "Document Title",
-  "category": "api_documentation",
-  "metadata": {"platform": "starknet"}
-}
-
-# Get document by ID
-GET /documents/{doc_id}
-
-# Update document
-PUT /documents/{doc_id}
-
-# Delete document
-DELETE /documents/{doc_id}
-```
-
-### Response Formats
-
-#### Search Response
-```json
-{
-  "results": [
-    {
-      "content": "Code or documentation content...",
-      "title": "Document title",
-      "similarity": 0.95,
-      "metadata": {
-        "file_path": "lib/services/trading_service.py",
-        "category": "implementation",
-        "platform": "extended_exchange"
-      }
-    }
-  ],
-  "query_type": "feature",
-  "total_results": 5,
-  "search_time": 0.023,
-  "citations": [
-    {
-      "source_id": "cite_abc123",
-      "file_path": "lib/services/trading_service.py",
-      "start_line": 45,
-      "end_line": 52,
-      "confidence": 0.95,
-      "context_snippet": "def place_order(symbol, side, quantity)..."
-    }
-  ],
-  "confidence_score": 0.89
-}
-```
-
-#### Task Status Response
-```json
-{
-  "task_id": "550e8400-e29b-41d4-a716-446655440000",
-  "status": "in_progress",
-  "progress": 65,
-  "stage": "chunking_documents",
-  "start_time": "2024-01-10T15:30:00Z",
-  "estimated_completion": "2024-01-10T15:32:00Z",
-  "result": null,
-  "error": null
-}
+cd knowledge_base/backend
+docker-compose up -d
+# RAG system available at http://localhost:8000
 ```
 
 ## 🧪 Testing
 
-Run the comprehensive test suite:
-
 ```bash
-# All tests
-python test_enhanced_rag.py
+# Run all tests
+flutter test
 
-# Citation generation tests
-python test_citations.py
+# Run with coverage
+flutter test --coverage
 
-# Performance benchmarks
-python test_performance_benchmark.py
+# Run specific test
+flutter test test/widget_test.dart
 
-# Code-aware chunking tests
-python test_code_aware_chunker.py
+# Analyze code quality
+flutter analyze
 ```
 
-### Test Coverage
+## 📱 Platform-Specific Notes
 
-- ✅ Search functionality and accuracy
-- ✅ Citation generation and metadata accuracy  
-- ✅ Context expansion for development queries
-- ✅ Multi-platform categorization
-- ✅ Asynchronous task processing
-- ✅ Performance benchmarks
-- ✅ Code-aware chunking preservation
+### iOS
+- **Minimum Version**: iOS 14.0+
+- **Required**: Xcode 14.4+ for building
+- **Setup**: Run `pod install` in the `ios/` directory
 
-## 🔧 Configuration
+### Android
+- **Minimum SDK**: API Level 26 (Android 8.0)
+- **Target SDK**: API Level 34
+- **Required**: Android Studio 2023.1.1+
 
-### Environment Variables
-
-```bash
-# Security
-API_KEY=your-secure-api-key
-
-# Database
-CHROMA_DB_PATH=../system/chroma_db
-COLLECTION_NAME=astratrade_knowledge_base
-
-# Embedding Model
-EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
-
-# Chunking Configuration
-CHUNK_SIZE=4000
-CHUNK_OVERLAP=800
-
-# Search Configuration
-MAX_RESULTS=15
-SIMILARITY_THRESHOLD=0.7
-
-# Claude Configuration
-CLAUDE_CONTEXT_SIZE=8000
-
-# RAGFlow Features
-CODE_AWARE_CHUNKING=true
-TEMPLATE_CHUNKING=true
-GROUNDED_CITATIONS=true
-QUALITY_THRESHOLD=0.7
-DEEP_DOC_UNDERSTANDING=true
-MULTI_MODAL_SUPPORT=true
-```
-
-### Docker Configuration
-
-The system includes production-ready Docker configuration:
-
-- **Multi-stage builds** for optimized images
-- **Non-root user** security
-- **Health checks** for both services  
-- **Persistent volumes** for data storage
-- **Environment variable support**
-- **Network isolation** with custom bridge network
-
-## 📊 Performance Metrics
-
-### Benchmark Results (v1.0.0)
-
-- **Query Response Time**: ~20ms average
-- **Indexing Speed**: 1,000+ documents/minute
-- **Search Accuracy**: 95%+ relevance score
-- **Memory Usage**: <512MB baseline
-- **Concurrent Users**: 100+ supported
-- **Uptime**: 99.9% availability target
-
-### Optimization Features
-
-- **Intelligent Caching**: Query result caching with TTL
-- **Lazy Loading**: On-demand model initialization
-- **Batch Processing**: Bulk document operations
-- **Connection Pooling**: Efficient database connections
-- **Resource Monitoring**: Real-time performance tracking
+### Web
+- **Browser Support**: Chrome 90+, Firefox 88+, Safari 14+
+- **PWA Ready**: Installable as progressive web app
 
 ## 🔐 Security Features
 
-- **API Key Authentication**: Secure endpoint access
-- **Input Validation**: Comprehensive data sanitization
-- **CORS Configuration**: Controlled cross-origin requests
-- **Environment Isolation**: Secrets management via .env
-- **Container Security**: Non-root execution, minimal attack surface
-- **Data Encryption**: Secure vector storage
+- **Social Authentication**: Secure OAuth with major providers
+- **Non-Custodial Wallets**: Users control their private keys
+- **Encrypted Storage**: Sensitive data protection at rest
+- **Network Security**: HTTPS/TLS for all communications
+- **Code Signing**: Verified application integrity
 
-## 🗂 Knowledge Base Content
+## 🛠️ Development
 
-### Supported Platforms
+### Code Generation
+```bash
+# Generate JSON serialization code
+dart run build_runner build
 
-1. **Extended Exchange API**
-   - Order placement and management
-   - Account and portfolio operations
-   - Market data and real-time feeds
-   - Authentication and security
-
-2. **Starknet & Cairo**
-   - Smart contract development
-   - Account deployment and management
-   - Transaction signing and execution
-   - SDK integration patterns
-
-3. **X10 Python SDK**
-   - Authentication methods
-   - Trading operations
-   - Account management
-   - Error handling patterns
-
-4. **Web3Auth Integration**
-   - Social login setup
-   - Wallet connection
-   - Multi-platform support
-   - Security best practices
-
-5. **Trading & Blockchain Development**
-   - Architecture patterns
-   - Best practices and conventions
-   - Testing and deployment
-   - Performance optimization
-
-## 🚀 Advanced Features
-
-### Claude-Optimized Search
-
-The system includes specialized search capabilities designed for Claude Code:
-
-- **Intent Detection**: Automatically identifies development intent (debug, feature, refactor, etc.)
-- **Context Expansion**: Includes related test files and documentation
-- **Smart Chunking**: Preserves code structure and relationships
-- **Quality Assessment**: Filters and ranks results for relevance
-
-### Grounded Citations
-
-Every search result includes comprehensive source attribution:
-
-```python
-Citation(
-    source_id="cite_abc123",
-    chunk_id="chunk_001", 
-    file_path="lib/services/trading_service.py",
-    start_line=45,
-    end_line=52,
-    confidence=0.95,
-    context_snippet="def place_order(symbol, side...)...",
-    source_url="https://github.com/..."
-)
+# Watch for changes
+dart run build_runner watch
 ```
 
-### Asynchronous Processing
+### State Management
+AstraTrade uses **Riverpod** for state management:
 
-Background task management with real-time status tracking:
+```dart
+// Reading state
+final user = ref.watch(currentUserProvider);
 
-- **Task Queuing**: Non-blocking operations
-- **Progress Tracking**: Real-time completion updates
-- **Error Handling**: Comprehensive failure recovery
-- **Status Persistence**: Task state survives restarts
+// Updating state
+await ref.read(authProvider.notifier).signInWithGoogle();
+```
 
-## 🔄 Development Workflow
+### Adding New Features
 
-### Adding New Content
+1. **Create Model** (`lib/models/`)
+2. **Add Service** (`lib/services/`)
+3. **Create Provider** (`lib/providers/`)
+4. **Build UI** (`lib/screens/` & `lib/widgets/`)
+5. **Write Tests** (`test/`)
 
-1. **Place documents** in `docs/` directory
-2. **Trigger re-indexing** via `/index/async` endpoint
-3. **Monitor progress** using task status endpoints
-4. **Verify integration** with search tests
+## 📚 Knowledge Base Integration
 
-### Extending the System
-
-1. **Add new categorizers** in `categorization_system.py`
-2. **Extend chunking logic** in `code_aware_chunker.py`
-3. **Enhance search algorithms** in `claude_search.py`
-4. **Update tests** to cover new functionality
-
-## 📈 Monitoring & Observability
-
-### Health Monitoring
+AstraTrade includes a RAG (Retrieval-Augmented Generation) system for development assistance:
 
 ```bash
-# Check system health
-curl http://localhost:8000/status
-
-# Monitor ChromaDB
-curl http://localhost:8001/api/v1/heartbeat
-
-# View application logs
-docker compose logs backend
-
-# Monitor resource usage
-docker stats
+# Query the knowledge base
+curl -X POST "http://localhost:8000/search" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Web3Auth Flutter integration", "max_results": 3}'
 ```
 
-### Performance Tracking
+## 🤝 Contributing
 
-The system provides comprehensive performance metrics:
+1. **Fork the repository**
+2. **Create feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Follow code style** (use `flutter analyze` and `dart format`)
+4. **Write tests** for new functionality
+5. **Commit changes** (`git commit -m 'Add amazing feature'`)
+6. **Push to branch** (`git push origin feature/amazing-feature`)
+7. **Open Pull Request**
 
-- Query response times and throughput
-- Indexing speed and completion rates
-- Memory and CPU utilization
-- Error rates and failure patterns
-- Search accuracy and relevance scores
+### Code Style Guidelines
 
-## 🛠 Troubleshooting
+- **Dart/Flutter**: Follow [Effective Dart](https://dart.dev/guides/language/effective-dart)
+- **Naming**: Use descriptive names for classes, methods, and variables
+- **Documentation**: Add doc comments for public APIs
+- **Testing**: Maintain 80%+ test coverage
+
+## 📋 Project Roadmap
+
+### Phase 1: Core Authentication ✅
+- [x] Web3Auth integration
+- [x] User onboarding flow
+- [x] Starknet wallet creation
+- [x] Basic UI framework
+
+### Phase 2: Trading Infrastructure 🚧
+- [ ] Market data integration
+- [ ] Order management system
+- [ ] Portfolio tracking
+- [ ] Transaction history
+
+### Phase 3: Advanced Features 📋
+- [ ] Algorithmic trading
+- [ ] Social trading features
+- [ ] Advanced analytics
+- [ ] Multi-chain support
+
+### Phase 4: Enterprise Features 📋
+- [ ] API for external developers
+- [ ] White-label solutions
+- [ ] Institutional features
+- [ ] Advanced security
+
+## 🔧 Troubleshooting
 
 ### Common Issues
 
-1. **Docker daemon not running**
-   ```bash
-   # macOS
-   open -a Docker
-   
-   # Linux
-   sudo systemctl start docker
-   ```
+**Build Errors:**
+```bash
+# Clean and rebuild
+flutter clean
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+```
 
-2. **Port conflicts**
-   ```bash
-   # Check port usage
-   lsof -i :8000
-   lsof -i :8001
-   
-   # Modify docker-compose.yml if needed
-   ```
+**Web3Auth Issues:**
+- Verify client ID configuration
+- Check redirect URL setup
+- Ensure platform-specific configurations are correct
 
-3. **Memory issues**
-   ```bash
-   # Increase Docker memory allocation
-   # Docker Desktop > Settings > Resources > Memory
-   ```
-
-4. **ChromaDB connection errors**
-   ```bash
-   # Restart ChromaDB service
-   docker compose restart chromadb
-   
-   # Check ChromaDB logs
-   docker compose logs chromadb
-   ```
-
-### Performance Optimization
-
-- **Increase memory allocation** for large knowledge bases
-- **Adjust chunk size** based on content type
-- **Configure embedding model** for your use case
-- **Enable result caching** for repeated queries
-- **Monitor resource usage** and scale accordingly
-
-## 📝 Contributing
-
-1. **Fork the repository**
-2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
-3. **Add comprehensive tests** for new functionality
-4. **Update documentation** as needed
-5. **Submit a pull request** with clear description
-
-### Development Guidelines
-
-- Follow existing code style and patterns
-- Add tests for all new functionality
-- Update documentation for API changes
-- Ensure Docker builds successfully
-- Run full test suite before submitting
+**Dependency Conflicts:**
+```bash
+# Update dependencies
+flutter pub upgrade
+flutter pub deps
+```
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- **ChromaDB** for vector storage and semantic search
-- **FastAPI** for high-performance API framework
-- **Sentence Transformers** for embedding generation
-- **Docker** for containerization platform
-- **Claude Code** integration and optimization
+- **Flutter Team** for the amazing cross-platform framework
+- **Web3Auth** for seamless Web3 authentication
+- **Starknet** for efficient blockchain infrastructure
+- **Riverpod** for excellent state management
+- **Open Source Community** for countless helpful packages
+
+## 📞 Support
+
+- **Documentation**: [Project Wiki](https://github.com/your-org/astratrade-project/wiki)
+- **Issues**: [GitHub Issues](https://github.com/your-org/astratrade-project/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-org/astratrade-project/discussions)
+- **Email**: support@astratrade.io
 
 ---
 
-**Built with ❤️ for the AstraTrade ecosystem**
+<div align="center">
 
-For questions, issues, or contributions, please open an issue on GitHub or contact the development team.
+**Built with ❤️ by the AstraTrade Team**
+
+[Website](https://astratrade.io) • [Documentation](https://docs.astratrade.io) • [Twitter](https://twitter.com/astratrade)
+
+</div>
