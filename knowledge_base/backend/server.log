@@ -1186,3 +1186,124 @@ INFO:     Application startup complete.
 INFO:watchfiles.main:3 changes detected
 INFO:watchfiles.main:3 changes detected
 INFO:watchfiles.main:3 changes detected
+✅ Claude Code enhancements initialized
+INFO:     127.0.0.1:54618 - "POST /index/async HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54632 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54637 - "GET /stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54683 - "POST /index HTTP/1.1" 200 OK
+INFO:rag_system:🔄 Force reindexing - clearing existing collection...
+INFO:rag_system:🔍 Indexing extended_exchange documentation...
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:01<00:01,  1.24s/it]Batches: 100%|██████████| 2/2 [00:01<00:00,  1.51it/s]
+INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:02,  1.48it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.73it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.84it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.33it/s]
+INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
+INFO:rag_system:✅ Indexed 132 documents from extended_exchange
+INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.91it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.95it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.52it/s]
+INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
+INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
+INFO:rag_system:🔍 Indexing starknet_dart documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.73it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.77it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.28it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.73it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.73it/s]
+INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
+INFO:rag_system:✅ Indexed 114 documents from starknet_dart
+INFO:rag_system:🔍 Indexing cairo_lang documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.90it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.94it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.68it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.34it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.39it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.38it/s]
+INFO:indexers:Indexed 114 chunks from Cairo_lang.md
+INFO:rag_system:✅ Indexed 114 documents from cairo_lang
+INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.01it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.01it/s]
+INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.80it/s]
+INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 19.97it/s]
+INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.18it/s]
+INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
+INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
+INFO:rag_system:🔍 Indexing web3auth documentation...
+✅ Added batch 1/1
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.24it/s]Batches: 100%|██████████| 2/2 [00:01<00:00,  2.04it/s]Batches: 100%|██████████| 2/2 [00:01<00:00,  1.86it/s]
+INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
+✅ Added batch 1/1
+Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.56it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]Batches:  75%|███████▌  | 3/4 [00:02<00:00,  1.23it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  1.72it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
+✅ Added batch 1/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.04it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.01it/s]
+INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
+INFO:rag_system:✅ Indexed 149 documents from web3auth
+INFO:rag_system:🔍 Indexing chipi_pay documentation...
+✅ Added batch 2/2
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:01<00:00,  1.45s/it]Batches: 100%|██████████| 1/1 [00:01<00:00,  1.45s/it]
+INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
+INFO:rag_system:✅ Indexed 24 documents from chipi_pay
+INFO:rag_system:🔍 Indexing product_design documentation...
+WARNING:indexers:Skipped empty file: game_design.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.58it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.58it/s]
+INFO:indexers:Indexed 4 chunks from frontend_proposal.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.94it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.94it/s]
+INFO:indexers:Indexed 8 chunks from game_specs.md
+✅ Added batch 1/1
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 15.92it/s]
+INFO:indexers:Indexed 2 chunks from bounty_requirements.md
+WARNING:indexers:Skipped empty file: user_archetypes.md
+INFO:rag_system:✅ Indexed 14 documents from product_design
+✅ Added batch 1/1
+INFO:     127.0.0.1:54696 - "GET /status/bb83a922-4cbc-4616-8773-5e35f0ca3d6a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54704 - "GET /stats HTTP/1.1" 200 OK
+INFO:watchfiles.main:1 change detected
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.80it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.80it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 77.91it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 109.85it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 88.68it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.46it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.83it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 92.76it/s]
+INFO:     127.0.0.1:55195 - "POST /search/claude HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 47.06it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 84.80it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 101.32it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.36it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 90.87it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.46it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 61.47it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 61.38it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.75it/s]
+INFO:     127.0.0.1:55209 - "POST /search/claude HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 31.43it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 94.40it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.09it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.26it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 79.94it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.26it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 78.83it/s]
+INFO:     127.0.0.1:55219 - "POST /search/claude HTTP/1.1" 200 OK
+INFO:watchfiles.main:11 changes detected
+WARNING:  WatchFiles detected changes in 'test_RAG.py', 'test_enhanced_rag.py', 'test_markdown_simple.py', 'test_performance_benchmark.py', 'test_quality_assessment.py', 'test_task_status.py', 'test_code_aware_chunker.py', 'test_citations.py', 'test_real_world.py', 'test_task_flow.py', 'test_rag_simple.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [18573]
+INFO:     Started server process [22064]
+INFO:     Waiting for application startup.
+INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
+INFO:rag_system:📊 Current documents in collection: 583
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:     Application startup complete.
