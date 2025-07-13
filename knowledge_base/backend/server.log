@@ -1,49 +1,0 @@
-INFO:     Started server process [69976]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 594
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'template_chunking', 'grounded_citations', 'deep_doc_understanding', 'chunk_size', 'chunk_overlap', 'quality_threshold', 'platforms']
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-✅ Claude Code enhancements initialized
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 37.48it/s]
-INFO:     127.0.0.1:52644 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 98.27it/s]
-INFO:     127.0.0.1:52663 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 76.42it/s]
-INFO:     127.0.0.1:52680 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 95.73it/s]
-INFO:     127.0.0.1:52693 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 60.69it/s]
-INFO:     127.0.0.1:52706 - "POST /search HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63304 - "GET /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63306 - "GET /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63308 - "POST /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63319 - "POST /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63329 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63522 - "POST /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63543 - "POST /context/proactive HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:63557 - "GET /docs HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63685 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63790 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63815 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63905 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64000 - "POST /context/feedback HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:64002 - "POST /context/feedback HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:64436 - "GET /health HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:64454 - "GET / HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.24it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.24it/s]
-INFO:     127.0.0.1:64477 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.27it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.26it/s]
-INFO:     127.0.0.1:64791 - "POST /search HTTP/1.1" 200 OK
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [69976]
-/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:301: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-69976-vf4k9dwe'}
-  warnings.warn(
