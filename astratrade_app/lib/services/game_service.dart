@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import '../api/rag_api_client.dart';
 import '../api/extended_exchange_client.dart';
+import '../api/astratrade_backend_client.dart';
 import 'starknet_service.dart';
 
 /// Result of a trading operation
@@ -38,7 +39,7 @@ class GameService {
   GameService._internal();
 
   final _random = math.Random();
-  final _ragClient = RagApiClient();
+  final _backendClient = AstraTradeBackendClient();
   final _starknetService = StarknetService();
   
   // Configuration
@@ -82,20 +83,38 @@ class GameService {
     "Orbital Stability Detected. A moment of cosmic peace.",
   ];
 
-  /// Performs a Quick Trade operation using RAG backend for realistic outcomes
-  /// Falls back to mock data if RAG is unavailable
-  Future<TradeResult> performQuickTrade() async {
-    if (_useRagBackend) {
-      try {
-        return await _performRagQuickTrade();
-      } catch (e) {
-        // RAG failed, fall back to mock data and disable RAG for this session
-        _useRagBackend = false;
-        debugPrint('RAG backend unavailable, falling back to mock data: $e');
-        return await _performMockQuickTrade();
+  /// Performs a Quick Trade operation using AstraTrade backend
+  Future<TradeResult> performQuickTrade({required int userId, String asset = 'ETH', String direction = 'long', double amount = 100.0}) async {
+    try {
+      final backendResult = await _backendClient.placeTrade(
+        userId: userId,
+        asset: asset,
+        direction: direction,
+        amount: amount,
+      );
+      // Map backend result to TradeResult
+      TradeOutcome outcome;
+      switch (backendResult.outcome) {
+        case 'profit':
+          outcome = TradeOutcome.profit;
+          break;
+        case 'loss':
+          outcome = TradeOutcome.loss;
+          break;
+        default:
+          outcome = TradeOutcome.breakeven;
       }
-    } else {
-      return await _performMockQuickTrade();
+      return TradeResult(
+        outcome: outcome,
+        stellarShardsGained: backendResult.xpGained, // Map XP to shards for now
+        luminaGained: 0, // Extend if backend supports
+        profitPercentage: backendResult.profitPercentage,
+        outcomeMessage: backendResult.message,
+        isCriticalForge: false, // Extend if backend supports
+      );
+    } catch (e) {
+      // Handle backend error
+      rethrow;
     }
   }
   
@@ -577,7 +596,6 @@ class GameService {
   
   /// Clean up resources
   void dispose() {
-    _ragClient.dispose();
     _exchangeClient?.dispose();
   }
 }

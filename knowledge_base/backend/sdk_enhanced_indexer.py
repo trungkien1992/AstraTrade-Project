@@ -49,7 +49,10 @@ class EnhancedSDKIndexer:
             "cairo_lang": self._index_cairo_lang,
             "avnu_paymaster": self._index_avnu_paymaster,
             "web3auth": self._index_web3auth,
-            "chipi_pay": self._index_chipi_pay
+            "chipi_pay": self._index_chipi_pay,
+            "Starknet_paymaster": self._index_starknet_paymaster,
+            "SNIP_29": self._index_snip_29,
+            "Web3Auth_flutter": self._index_web3auth_flutter
         }
         self.api_endpoints = {
             "extended_exchange": "https://api.extended-exchange.com/docs",
@@ -60,7 +63,8 @@ class EnhancedSDKIndexer:
             "Starknet_paymaster": "https://starknetjs.com/docs/next/guides/paymaster/",
             "web3auth": "https://web3auth.io/docs",
             "chipi_pay": "https://docs.chipi.com",
-            "SNIP_29": "https://github.com/starkware-libs/cairo/blob/main/snippets/snip29.cairo"
+            "SNIP_29": "https://github.com/starkware-libs/cairo/blob/main/snippets/snip29.cairo",
+            "Web3Auth_flutter": "https://web3auth.io/docs/flutter/sdk-integration/overview"
         }
         
     async def index_all_sdks(self) -> Dict[str, int]:

@@ -1,75 +1,4 @@
-/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py:73: DeprecationWarning: 
-        on_event is deprecated, use lifespan event handlers instead.
-
-        Read more about it in the
-        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
-        
-  @app.on_event("startup")
-INFO:     Will watch for changes in these directories: ['/Users/admin/AstraTrade-Project/knowledge_base/backend']
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [71405] using WatchFiles
-INFO:     Started server process [71532]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-ERROR:    Traceback (most recent call last):
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 692, in lifespan
-    async with self.lifespan_context(app) as maybe_state:
-               ~~~~~~~~~~~~~~~~~~~~~^^^^^
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 569, in __aenter__
-    await self._router.startup()
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 669, in startup
-    await handler()
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 76, in startup_event
-    await rag_system.initialize()
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/rag_system.py", line 110, in initialize
-    self.collection = self.chroma_client.create_collection(
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
-        name=RAG_CONFIG["collection_name"],
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<9 lines>...
-        }
-        ^
-    )
-    ^
-  File "/opt/homebrew/lib/python3.13/site-packages/chromadb/api/client.py", line 168, in create_collection
-    model = self._server.create_collection(
-        name=name,
-    ...<4 lines>...
-        configuration=configuration,
-    )
-  File "/opt/homebrew/lib/python3.13/site-packages/chromadb/api/rust.py", line 227, in create_collection
-    collection = self.bindings.create_collection(
-        name, configuration_json_str, metadata, get_or_create, tenant, database
-    )
-TypeError: argument 'metadata': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'list' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'list' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not list
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'list' object cannot be converted to 'PyString'
-
-ERROR:    Application startup failed. Exiting.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'rag_system.py'. Reloading...
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [71829]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'rag_system.py'. Reloading...
-INFO:rag_system:✅ Created new collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 0
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [71849]
+INFO:     Started server process [69976]
 INFO:     Waiting for application startup.
 INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
 INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
@@ -77,1264 +6,44 @@ INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
 INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 0
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
+INFO:rag_system:📊 Current documents in collection: 594
+INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'template_chunking', 'grounded_citations', 'deep_doc_understanding', 'chunk_size', 'chunk_overlap', 'quality_threshold', 'platforms']
 INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:50874 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50887 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔄 Force reindexing - clearing existing collection...
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-    result = await app(  # type: ignore[func-returns-value]
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        self.scope, self.receive, self.send
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
-    await super().__call__(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
-    raise exc
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
-    await self.app(scope, receive, _send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
-    await self.app(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-    raise exc
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-    await app(scope, receive, sender)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
-    await route.handle(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
-    await self.app(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
-    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-    raise exc
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-    await app(scope, receive, sender)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 74, in app
-    await response(scope, receive, send)
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/responses.py", line 160, in __call__
-    await self.background()
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/background.py", line 41, in __call__
-    await task()
-  File "/opt/homebrew/lib/python3.13/site-packages/starlette/background.py", line 26, in __call__
-    await self.func(*self.args, **self.kwargs)
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/rag_system.py", line 177, in index_astratrade_documentation
-    self.collection.delete()
-    ~~~~~~~~~~~~~~~~~~~~~~^^
-  File "/opt/homebrew/lib/python3.13/site-packages/chromadb/api/models/Collection.py", line 404, in delete
-    delete_request = self._validate_and_prepare_delete_request(
-        ids, where, where_document
-    )
-  File "/opt/homebrew/lib/python3.13/site-packages/chromadb/api/models/CollectionCommon.py", line 95, in wrapper
-    return func(self, *args, **kwargs)
-  File "/opt/homebrew/lib/python3.13/site-packages/chromadb/api/models/CollectionCommon.py", line 442, in _validate_and_prepare_delete_request
-    raise ValueError(
-        "At least one of ids, where, or where_document must be provided"
-    )
-ValueError: At least one of ids, where, or where_document must be provided in delete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'rag_system.py'. Reloading...
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 37.48it/s]
+INFO:     127.0.0.1:52644 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 98.27it/s]
+INFO:     127.0.0.1:52663 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 76.42it/s]
+INFO:     127.0.0.1:52680 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 95.73it/s]
+INFO:     127.0.0.1:52693 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 60.69it/s]
+INFO:     127.0.0.1:52706 - "POST /search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63304 - "GET /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63306 - "GET /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63308 - "POST /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63319 - "POST /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63329 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63522 - "POST /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63543 - "POST /context/proactive HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63557 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63685 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63790 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63815 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63905 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64000 - "POST /context/feedback HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64002 - "POST /context/feedback HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64436 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64454 - "GET / HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.24it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.24it/s]
+INFO:     127.0.0.1:64477 - "POST /search HTTP/1.1" 200 OK
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.27it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  5.26it/s]
+INFO:     127.0.0.1:64791 - "POST /search HTTP/1.1" 200 OK
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [71849]
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [71971]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 0
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:50914 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔄 Force reindexing - clearing existing collection...
-INFO:rag_system:🔍 Indexing extended_exchange documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.72it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.15it/s]
-ERROR:indexers:Failed to index Extended Exchange docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from extended_exchange
-INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.84it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.87it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.75it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.34it/s]
-ERROR:indexers:Failed to index X10 Python SDK docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from x10_python_sdk
-INFO:rag_system:🔍 Indexing starknet_dart documentation...
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.80it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.53it/s]Batches:  75%|███████▌  | 3/4 [00:02<00:00,  1.40it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  2.10it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  1.84it/s]
-ERROR:indexers:Failed to index Starknet.dart SDK docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from starknet_dart
-INFO:rag_system:🔍 Indexing cairo_lang documentation...
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.78it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.77it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.30it/s]
-ERROR:indexers:Failed to index Cairo language docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from cairo_lang
-INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.05it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.04it/s]
-ERROR:indexers:Failed to index AVNU Paymaster docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from avnu_paymaster
-INFO:rag_system:🔍 Indexing web3auth documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.96it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.02it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.01it/s]
-ERROR:indexers:Failed to index Web3Auth docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from web3auth
-INFO:rag_system:🔍 Indexing chipi_pay documentation...
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.44it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.44it/s]
-ERROR:indexers:Failed to index ChipiPay docs: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-INFO:rag_system:✅ Indexed 0 documents from chipi_pay
-INFO:rag_system:🔍 Indexing product_design documentation...
-ERROR:indexers:Failed to process file ../docs/project_design/game_design.md: cannot access local variable 'filename' where it is not associated with a value
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 12.92it/s]
-ERROR:indexers:Failed to process file ../docs/project_design/frontend_proposal.md: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.33it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.32it/s]
-ERROR:indexers:Failed to process file ../docs/project_design/game_specs.md: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 27.13it/s]
-ERROR:indexers:Failed to process file ../docs/project_design/bounty_requirements.md: argument 'metadatas': failed to extract enum MetadataValue ('Bool | Int | Float | Str')
-- variant Bool (Bool): TypeError: failed to extract field MetadataValue::Bool.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyBool'
-- variant Int (Int): TypeError: failed to extract field MetadataValue::Int.0, caused by TypeError: 'NoneType' object cannot be interpreted as an integer
-- variant Float (Float): TypeError: failed to extract field MetadataValue::Float.0, caused by TypeError: must be real number, not NoneType
-- variant Str (Str): TypeError: failed to extract field MetadataValue::Str.0, caused by TypeError: 'NoneType' object cannot be converted to 'PyString'
-WARNING:indexers:Skipped empty file: bounty_requirements.md
-INFO:rag_system:✅ Indexed 0 documents from product_design
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'rag_system.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [71971]
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [72148]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 0
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'indexers.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [72148]
-INFO:     Started server process [72181]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 0
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:50979 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔄 Force reindexing - clearing existing collection...
-INFO:rag_system:🔍 Indexing extended_exchange documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]INFO:watchfiles.main:3 changes detected
-Batches:  50%|█████     | 1/2 [00:00<00:00,  1.69it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.03it/s]
-INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.02it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.93it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.43it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 132 documents from extended_exchange
-INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.99it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.87it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.95it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.55it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
-INFO:rag_system:🔍 Indexing starknet_dart documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.86it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.85it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.91it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.42it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.81it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.81it/s]
-INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
-INFO:rag_system:✅ Indexed 114 documents from starknet_dart
-INFO:rag_system:🔍 Indexing cairo_lang documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.00it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.03it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.03it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.59it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.32it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.32it/s]
-INFO:indexers:Indexed 114 chunks from Cairo_lang.md
-INFO:rag_system:✅ Indexed 114 documents from cairo_lang
-INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.34it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.34it/s]
-INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.81it/s]
-INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 22.23it/s]
-INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 17.41it/s]
-INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
-INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
-INFO:rag_system:🔍 Indexing web3auth documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.82it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.86it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.63it/s]
-INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.72it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.73it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.85it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.33it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.57it/s]
-INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
-INFO:rag_system:✅ Indexed 149 documents from web3auth
-INFO:rag_system:🔍 Indexing chipi_pay documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.43it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.43it/s]
-INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
-INFO:rag_system:✅ Indexed 24 documents from chipi_pay
-INFO:rag_system:🔍 Indexing product_design documentation...
-WARNING:indexers:Skipped empty file: game_design.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 15.08it/s]
-INFO:indexers:Indexed 4 chunks from frontend_proposal.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.59it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.58it/s]
-INFO:indexers:Indexed 8 chunks from game_specs.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 25.00it/s]
-INFO:indexers:Indexed 2 chunks from bounty_requirements.md
-WARNING:indexers:Skipped empty file: user_archetypes.md
-INFO:rag_system:✅ Indexed 14 documents from product_design
-✅ Added batch 1/1
-INFO:     127.0.0.1:51003 - "GET /stats HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 67.28it/s]
-INFO:     127.0.0.1:51028 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 117.22it/s]
-INFO:     127.0.0.1:51034 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 117.58it/s]
-INFO:     127.0.0.1:51036 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 124.53it/s]
-INFO:     127.0.0.1:51045 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 121.10it/s]
-INFO:     127.0.0.1:51058 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.24it/s]
-INFO:     127.0.0.1:51065 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.35it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  8.34it/s]
-INFO:     127.0.0.1:51071 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 105.80it/s]
-INFO:     127.0.0.1:51077 - "POST /search HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'config.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [72181]
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
-                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
-    exitcode = _main(fd, parent_sentinel)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
-    prepare(preparation_data)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
-    _fixup_main_from_path(data['init_main_from_path'])
-    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
-    main_content = runpy.run_path(main_path,
-                                  run_name="__mp_main__")
-  File "<frozen runpy>", line 287, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
-    from config import RAG_CONFIG
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-ModuleNotFoundError: No module named 'pydantic_settings'
-INFO:watchfiles.main:3 changes detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'security.py'. Reloading...
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
-                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
-    exitcode = _main(fd, parent_sentinel)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
-    prepare(preparation_data)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
-    _fixup_main_from_path(data['init_main_from_path'])
-    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
-    main_content = runpy.run_path(main_path,
-                                  run_name="__mp_main__")
-  File "<frozen runpy>", line 287, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
-    from config import RAG_CONFIG
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-ModuleNotFoundError: No module named 'pydantic_settings'
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=5, pipe_handle=7)
-                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 122, in spawn_main
-    exitcode = _main(fd, parent_sentinel)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 131, in _main
-    prepare(preparation_data)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 246, in prepare
-    _fixup_main_from_path(data['init_main_from_path'])
-    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/spawn.py", line 297, in _fixup_main_from_path
-    main_content = runpy.run_path(main_path,
-                                  run_name="__mp_main__")
-  File "<frozen runpy>", line 287, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/main.py", line 26, in <module>
-    from config import RAG_CONFIG, settings
-  File "/Users/admin/AstraTrade-Project/knowledge_base/backend/config.py", line 8, in <module>
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-ModuleNotFoundError: No module named 'pydantic_settings'
-INFO:watchfiles.main:3 changes detected
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Started server process [73977]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:51682 - "POST /index HTTP/1.1" 403 Forbidden
-INFO:     127.0.0.1:51694 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔍 Indexing extended_exchange documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.87it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.41it/s]
-INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.78it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.91it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.94it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.52it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 132 documents from extended_exchange
-INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.00it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.01it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.04it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.67it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
-INFO:rag_system:🔍 Indexing starknet_dart documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.89it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.86it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.44it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.90it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.90it/s]
-INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
-INFO:rag_system:✅ Indexed 114 documents from starknet_dart
-INFO:rag_system:🔍 Indexing cairo_lang documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.85it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.68it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.75it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.24it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.41it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  4.41it/s]
-INFO:indexers:Indexed 114 chunks from Cairo_lang.md
-INFO:rag_system:✅ Indexed 114 documents from cairo_lang
-INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.71it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.71it/s]
-INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 16.04it/s]
-INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 20.27it/s]
-INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 14.87it/s]
-INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
-INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
-INFO:rag_system:🔍 Indexing web3auth documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.86it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.96it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.72it/s]
-INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.93it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  2.00it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.02it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.56it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.55it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.54it/s]
-INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
-INFO:rag_system:✅ Indexed 149 documents from web3auth
-INFO:rag_system:🔍 Indexing chipi_pay documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.39it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.39it/s]
-INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
-INFO:rag_system:✅ Indexed 24 documents from chipi_pay
-INFO:rag_system:🔍 Indexing product_design documentation...
-WARNING:indexers:Skipped empty file: game_design.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.33it/s]
-INFO:indexers:Indexed 4 chunks from frontend_proposal.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.13it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.12it/s]
-INFO:indexers:Indexed 8 chunks from game_specs.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 23.94it/s]
-INFO:indexers:Indexed 2 chunks from bounty_requirements.md
-WARNING:indexers:Skipped empty file: user_archetypes.md
-INFO:rag_system:✅ Indexed 14 documents from product_design
-✅ Added batch 1/1
-INFO:     127.0.0.1:51783 - "POST /optimize HTTP/1.1" 403 Forbidden
-INFO:     127.0.0.1:51792 - "POST /optimize HTTP/1.1" 200 OK
-ERROR:optimization_manager:Optimization failed: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
-INFO:     127.0.0.1:51799 - "GET /stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51808 - "POST /index HTTP/1.1" 403 Forbidden
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [73977]
-INFO:     Started server process [74834]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [74870]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [74870]
-INFO:     Started server process [74925]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [74954]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'rag_system.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [74954]
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [74994]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'models.py'. Reloading...
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [75024]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75024]
-INFO:     Started server process [75085]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75085]
-INFO:     Started server process [75160]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:     Started server process [75192]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75192]
-INFO:     Started server process [75248]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75248]
-INFO:     Started server process [75338]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'code_aware_chunker.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:3 changes detected
-INFO:     Started server process [75402]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_code_aware_chunker.py'. Reloading...
-INFO:     Started server process [75427]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_markdown_simple.py'. Reloading...
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [75446]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_real_world.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75446]
-INFO:     Started server process [75537]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:52504 - "GET /stats HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 23.44it/s]
-INFO:     127.0.0.1:52508 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 150.04it/s]
-INFO:     127.0.0.1:52509 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 146.15it/s]
-INFO:     127.0.0.1:52510 - "POST /search HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52537 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔄 Force reindexing - clearing existing collection...
-INFO:rag_system:🔍 Indexing extended_exchange documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.95it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.55it/s]
-INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.99it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.02it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.99it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.62it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 132 documents from extended_exchange
-INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.06it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.05it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.05it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.70it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
-INFO:rag_system:🔍 Indexing starknet_dart documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.86it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.84it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.91it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.42it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.76it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.76it/s]
-INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
-INFO:rag_system:✅ Indexed 114 documents from starknet_dart
-INFO:rag_system:🔍 Indexing cairo_lang documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.69it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.85it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.40it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.50it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.50it/s]
-INFO:indexers:Indexed 114 chunks from Cairo_lang.md
-INFO:rag_system:✅ Indexed 114 documents from cairo_lang
-INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.16it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.16it/s]
-INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 19.01it/s]
-INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 25.51it/s]
-INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 18.54it/s]
-INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
-INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
-INFO:rag_system:🔍 Indexing web3auth documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.96it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  3.02it/s]Batches: 100%|██████████| 2/2 [00:00<00:00,  2.79it/s]
-INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  2.04it/s]Batches:  50%|█████     | 2/4 [00:00<00:00,  2.05it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  2.03it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.57it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.29it/s]
-INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
-INFO:rag_system:✅ Indexed 149 documents from web3auth
-INFO:rag_system:🔍 Indexing chipi_pay documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.99it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.99it/s]
-INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
-INFO:rag_system:✅ Indexed 24 documents from chipi_pay
-INFO:rag_system:🔍 Indexing product_design documentation...
-WARNING:indexers:Skipped empty file: game_design.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.03it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  9.02it/s]
-INFO:indexers:Indexed 4 chunks from frontend_proposal.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.67it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  7.66it/s]
-INFO:indexers:Indexed 8 chunks from game_specs.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 26.47it/s]
-INFO:indexers:Indexed 2 chunks from bounty_requirements.md
-WARNING:indexers:Skipped empty file: user_archetypes.md
-INFO:rag_system:✅ Indexed 14 documents from product_design
-✅ Added batch 1/1
-INFO:     127.0.0.1:52551 - "GET /stats HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [75537]
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Started server process [76424]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76424]
-INFO:     Started server process [76453]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [76476]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [76496]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76496]
-INFO:     Started server process [76523]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:watchfiles.main:3 changes detected
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:     Started server process [76555]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_task_status.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76555]
-INFO:     Started server process [76608]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:53005 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53010 - "GET /status/invalid-task-id-12345 HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:53011 - "POST /index HTTP/1.1" 403 Forbidden
-INFO:     127.0.0.1:53012 - "POST /optimize HTTP/1.1" 403 Forbidden
-INFO:     127.0.0.1:53013 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53014 - "GET /status/9abc8a2d-e93e-4cc9-9ea0-62a328df2b3b HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_task_flow.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76608]
-INFO:     Started server process [76701]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:53047 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53056 - "GET /status/b5797225-a29e-4714-accc-fb60f0652366 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53058 - "GET /status/b5797225-a29e-4714-accc-fb60f0652366 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53059 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53060 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53061 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53062 - "GET /status/72591e96-2295-4b88-aee2-ae9a6ed3f771 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53063 - "GET /status/cc4bae06-d4f2-47ec-b849-f6c79485b6c2 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53064 - "GET /status/6acbe118-15ce-43b3-a4ee-0eab54dd7d47 HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'demo_task_status.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76701]
-INFO:     Started server process [76805]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:53096 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53107 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53112 - "GET /status/35a7119a-f6bd-456c-8c36-325318aa025f HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53113 - "GET /status/invalid-task-id HTTP/1.1" 404 Not Found
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:watchfiles.main:1 change detected
-INFO:     127.0.0.1:53430 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53458 - "POST /index/code_aware HTTP/1.1" 200 OK
-🔄 Starting code-aware re-indexing...
-❌ Code-aware re-indexing failed: At least one of ids, where, or where_document must be provided in delete.
-INFO:     127.0.0.1:53465 - "GET /stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53484 - "GET /stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53505 - "GET /claude/status HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'claude_search.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [76805]
-INFO:     Started server process [18125]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:watchfiles.main:3 changes detected
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'claude_search.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18125]
-INFO:     Started server process [18170]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'claude_search.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18170]
-INFO:     Started server process [18194]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:watchfiles.main:3 changes detected
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_citations.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18194]
-INFO:     Started server process [18311]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_citations.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18311]
-INFO:     Started server process [18383]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_enhanced_rag.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18383]
-INFO:     Started server process [18498]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:1 change detected
-WARNING:  WatchFiles detected changes in 'test_citations.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18498]
-INFO:watchfiles.main:1 change detected
-INFO:     Started server process [18573]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-INFO:watchfiles.main:3 changes detected
-INFO:watchfiles.main:3 changes detected
-INFO:watchfiles.main:3 changes detected
-✅ Claude Code enhancements initialized
-INFO:     127.0.0.1:54618 - "POST /index/async HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:54632 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54637 - "GET /stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54683 - "POST /index HTTP/1.1" 200 OK
-INFO:rag_system:🔄 Force reindexing - clearing existing collection...
-INFO:rag_system:🔍 Indexing extended_exchange documentation...
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:01<00:01,  1.24s/it]Batches: 100%|██████████| 2/2 [00:01<00:00,  1.51it/s]
-INFO:indexers:Indexed 35 chunks from Extended_API_exchange.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:02,  1.48it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.73it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.84it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.33it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 132 documents from extended_exchange
-INFO:rag_system:🔍 Indexing x10_python_sdk documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.91it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.95it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.52it/s]
-INFO:indexers:Indexed 97 chunks from Extended_API_Python_sdk.md
-INFO:rag_system:✅ Indexed 97 documents from x10_python_sdk
-INFO:rag_system:🔍 Indexing starknet_dart documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.73it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.77it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.28it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.73it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.73it/s]
-INFO:indexers:Indexed 114 chunks from starket_dart_sdk.md
-INFO:rag_system:✅ Indexed 114 documents from starknet_dart
-INFO:rag_system:🔍 Indexing cairo_lang documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.90it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.94it/s]Batches:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.68it/s]Batches: 100%|██████████| 4/4 [00:01<00:00,  2.34it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.39it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.38it/s]
-INFO:indexers:Indexed 114 chunks from Cairo_lang.md
-INFO:rag_system:✅ Indexed 114 documents from cairo_lang
-INFO:rag_system:🔍 Indexing avnu_paymaster documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.01it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.01it/s]
-INFO:indexers:Indexed 18 chunks from ANVU_paymaster_Git_SDK.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 11.80it/s]
-INFO:indexers:Indexed 3 chunks from AVNU_API_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 19.97it/s]
-INFO:indexers:Indexed 2 chunks from AVNU_PAYMASTER_INTEGRATION.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 13.18it/s]
-INFO:indexers:Indexed 3 chunks from Starknet_paymaster.md
-INFO:rag_system:✅ Indexed 26 documents from avnu_paymaster
-INFO:rag_system:🔍 Indexing web3auth documentation...
-✅ Added batch 1/1
-Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:00<00:00,  1.24it/s]Batches: 100%|██████████| 2/2 [00:01<00:00,  2.04it/s]Batches: 100%|██████████| 2/2 [00:01<00:00,  1.86it/s]
-INFO:indexers:Indexed 44 chunks from WEB3AUTH_FLUTTER_SDK.MD
-✅ Added batch 1/1
-Batches:   0%|          | 0/4 [00:00<?, ?it/s]Batches:  25%|██▌       | 1/4 [00:00<00:01,  1.56it/s]Batches:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]Batches:  75%|███████▌  | 3/4 [00:02<00:00,  1.23it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  1.72it/s]Batches: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
-✅ Added batch 1/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.04it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.01it/s]
-INFO:indexers:Indexed 105 chunks from WEB3_AUTH.MD
-INFO:rag_system:✅ Indexed 149 documents from web3auth
-INFO:rag_system:🔍 Indexing chipi_pay documentation...
-✅ Added batch 2/2
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:01<00:00,  1.45s/it]Batches: 100%|██████████| 1/1 [00:01<00:00,  1.45s/it]
-INFO:indexers:Indexed 24 chunks from chipi_pay_sdk.md
-INFO:rag_system:✅ Indexed 24 documents from chipi_pay
-INFO:rag_system:🔍 Indexing product_design documentation...
-WARNING:indexers:Skipped empty file: game_design.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.58it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.58it/s]
-INFO:indexers:Indexed 4 chunks from frontend_proposal.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.94it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.94it/s]
-INFO:indexers:Indexed 8 chunks from game_specs.md
-✅ Added batch 1/1
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 15.92it/s]
-INFO:indexers:Indexed 2 chunks from bounty_requirements.md
-WARNING:indexers:Skipped empty file: user_archetypes.md
-INFO:rag_system:✅ Indexed 14 documents from product_design
-✅ Added batch 1/1
-INFO:     127.0.0.1:54696 - "GET /status/bb83a922-4cbc-4616-8773-5e35f0ca3d6a HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54704 - "GET /stats HTTP/1.1" 200 OK
-INFO:watchfiles.main:1 change detected
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.80it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.80it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 77.91it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 109.85it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 88.68it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 104.46it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 106.83it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 92.76it/s]
-INFO:     127.0.0.1:55195 - "POST /search/claude HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 47.06it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 84.80it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 101.32it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 99.36it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 90.87it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 96.46it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 61.47it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 61.38it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.75it/s]
-INFO:     127.0.0.1:55209 - "POST /search/claude HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 31.43it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 94.40it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.09it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 102.26it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 79.94it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 100.26it/s]
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 78.83it/s]
-INFO:     127.0.0.1:55219 - "POST /search/claude HTTP/1.1" 200 OK
-INFO:watchfiles.main:11 changes detected
-WARNING:  WatchFiles detected changes in 'test_RAG.py', 'test_enhanced_rag.py', 'test_markdown_simple.py', 'test_performance_benchmark.py', 'test_quality_assessment.py', 'test_task_status.py', 'test_code_aware_chunker.py', 'test_citations.py', 'test_real_world.py', 'test_task_flow.py', 'test_rag_simple.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [18573]
-INFO:     Started server process [22064]
-INFO:     Waiting for application startup.
-INFO:rag_system:🚀 Initializing AstraTrade RAG system with advanced features...
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:rag_system:✅ Loaded existing collection: astratrade_knowledge_base
-INFO:rag_system:📊 Current documents in collection: 583
-INFO:rag_system:🔧 RAGFlow features enabled: ['chroma_db_path', 'collection_name', 'embedding_model', 'chunk_size', 'chunk_overlap', 'max_results', 'similarity_threshold', 'claude_context_size', 'code_aware_chunking', 'template_chunking', 'grounded_citations', 'quality_threshold', 'deep_doc_understanding', 'multi_modal_support', 'platforms']
-INFO:     Application startup complete.
-✅ Claude Code enhancements initialized
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.22it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.22it/s]
-INFO:     127.0.0.1:56501 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 58.26it/s]
-INFO:     127.0.0.1:56516 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.97it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  2.96it/s]
-INFO:     127.0.0.1:58342 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 30.39it/s]
-INFO:     127.0.0.1:58357 - "POST /search HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58372 - "GET /health HTTP/1.1" 404 Not Found
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.90it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  1.90it/s]
-INFO:     127.0.0.1:58428 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.14it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.13it/s]
-INFO:     127.0.0.1:63851 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 54.96it/s]
-INFO:     127.0.0.1:63865 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 46.17it/s]
-INFO:     127.0.0.1:63879 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 82.45it/s]
-INFO:     127.0.0.1:63885 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.58it/s]Batches: 100%|██████████| 1/1 [00:00<00:00,  3.58it/s]
-INFO:     127.0.0.1:65500 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 67.49it/s]
-INFO:     127.0.0.1:65512 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 66.94it/s]
-INFO:     127.0.0.1:65515 - "POST /search HTTP/1.1" 200 OK
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 87.51it/s]
-INFO:     127.0.0.1:65518 - "POST /search HTTP/1.1" 200 OK
-INFO:     127.0.0.1:65532 - "GET /health HTTP/1.1" 404 Not Found
-Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 64.70it/s]
-INFO:     127.0.0.1:49156 - "POST /search HTTP/1.1" 200 OK
+INFO:     Finished server process [69976]
+/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:301: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-69976-vf4k9dwe'}
+  warnings.warn(

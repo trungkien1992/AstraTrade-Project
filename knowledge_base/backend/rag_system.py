@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Core RAG system implementation for AstraTrade
+Core RAG system implementation for multi-platform knowledge bases
 """
 
 import os
@@ -11,6 +11,7 @@ import logging
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 from pathlib import Path
+import json
 
 # Vector database and embeddings
 import chromadb
@@ -69,8 +70,8 @@ class DocumentQualityAssessor:
         
         return min(1.0, score)
 
-class AstraTradeRAG:
-    """High-performance RAG system for AstraTrade trading platform with RAGFlow features"""
+class RAGSystem:
+    """High-performance RAG system for multi-platform knowledge bases with RAGFlow features"""
     
     def __init__(self):
         self.chroma_client = None
@@ -86,7 +87,7 @@ class AstraTradeRAG:
         
     async def initialize(self):
         """Initialize the RAG system with RAGFlow-inspired features"""
-        logger.info("🚀 Initializing AstraTrade RAG system with advanced features...")
+        logger.info("🚀 Initializing RAG system with advanced features...")
         
         # Initialize ChromaDB
         self.chroma_client = chromadb.PersistentClient(path=RAG_CONFIG["chroma_db_path"])
@@ -168,19 +169,128 @@ class AstraTradeRAG:
             platforms=RAG_CONFIG["platforms"]
         )
         
-    async def index_astratrade_documentation(self, force_reindex: bool = False) -> Dict[str, Any]:
-        """Index all AstraTrade documentation with RAGFlow-inspired features"""
+    async def _index_commit_history(self) -> int:
+        """
+        Scans the .rag_commits directory and indexes each commit as a document.
+        """
+        logger.info("🔍 Indexing commit history...")
+        commit_dir = Path(RAG_CONFIG["chroma_db_path"]).resolve().parent / '.rag_commits'
+        if not commit_dir.exists():
+            logger.warning(f"Commit directory not found: {commit_dir}")
+            return 0
+
+        commit_files = list(commit_dir.glob("commit_*.json"))
+        if not commit_files:
+            logger.info("No new commits to index.")
+            return 0
+
+        ids = []
+        documents = []
+        metadatas = []
+
+        for commit_file in commit_files:
+            try:
+                with open(commit_file, 'r', encoding='utf-8') as f:
+                    card = json.load(f)
+                
+                # Check required fields
+                if 'what_changed' not in card:
+                    logger.warning(f"Skipping {commit_file.name}: missing 'what_changed' field")
+                    continue
+                if 'code_changes' not in card:
+                    logger.warning(f"Skipping {commit_file.name}: missing 'code_changes' field")
+                    continue
+                if 'metadata' not in card or 'special_code' not in card['metadata']:
+                    logger.warning(f"Skipping {commit_file.name}: missing metadata.special_code")
+                    continue
+                
+                # Combine message and diff for a rich semantic embedding
+                full_content = (
+                    f"Commit Message: {card['what_changed']}\n\n"
+                    f"Code Changes:\n{card['code_changes']}"
+                )
+                # Use the commit hash as the unique ID to prevent duplicates
+                commit_hash = card['metadata']['special_code']
+                
+                # Enhance metadata for proper categorization and search
+                enhanced_metadata = {
+                    **card['metadata'],
+                    'category': 'commit_history',
+                    'subcategory': 'commit',
+                    'platform': 'commits',
+                    'doc_type': 'commit_record',
+                    'importance': 'high',
+                    'source': 'commit_indexer',
+                    'title': f"Commit: {card['what_changed'][:50]}...",
+                    'commit_message': card['what_changed']
+                }
+                
+                ids.append(commit_hash)
+                documents.append(full_content)
+                metadatas.append(enhanced_metadata)
+                
+            except Exception as e:
+                logger.error(f"Error processing commit file {commit_file.name}: {str(e)}")
+                continue
+
+        if ids:
+            self.collection.add(
+                ids=ids,
+                documents=documents,
+                metadatas=metadatas
+            )
+            logger.info(f"✅ Indexed {len(ids)} commits into the RAG system.")
+            return len(ids)
+        return 0
+
+    async def _index_pull_requests(self) -> int:
+        """Scans the .rag_pull_requests directory and indexes each pull request memory card."""
+        logger.info("🔍 Indexing pull request history...")
+        pr_dir = Path(RAG_CONFIG["chroma_db_path"]).resolve().parent / '.rag_pull_requests'
+        if not pr_dir.exists():
+            logger.warning(f"Pull request directory not found: {pr_dir}")
+            return 0
+
+        pr_files = list(pr_dir.glob("pr_*.json"))
+        if not pr_files:
+            logger.info("No new pull request memory cards to index.")
+            return 0
+
+        ids_to_add = []
+        documents_to_add = []
+        metadatas_to_add = []
+
+        for pr_file in pr_files:
+            with open(pr_file, 'r', encoding='utf-8') as f:
+                card = json.load(f)
+            pr_number = card['metadata']['pr_number']
+            ids_to_add.append(f"pr_{pr_number}")
+            documents_to_add.append(card['content'])
+            metadatas_to_add.append(card['metadata'])
+
+        if ids_to_add:
+            self.collection.add(
+                ids=ids_to_add,
+                documents=documents_to_add,
+                metadatas=metadatas_to_add
+            )
+            logger.info(f"✅ Indexed {len(ids_to_add)} pull requests into the RAG system.")
+            return len(ids_to_add)
+        return 0
+
+    async def index_documentation(self, project_name: str, force_reindex: bool = False) -> Dict[str, Any]:
+        """Index all documentation for a specific project with RAGFlow-inspired features"""
         start_time = datetime.now()
         
         if force_reindex:
-            logger.info("🔄 Force reindexing - clearing existing collection...")
+            logger.info(f"🔄 Force reindexing - clearing existing collection for {project_name}...")
             # Delete all documents in the collection
             try:
                 existing_docs = self.collection.get()
                 if existing_docs['ids']:
                     self.collection.delete(ids=existing_docs['ids'])
             except Exception as e:
-                logger.warning(f"Could not clear existing collection: {e}")
+                logger.warning(f"Could not clear existing collection for {project_name}: {e}")
                 # If we can't clear, let's delete and recreate the collection
                 try:
                     self.chroma_client.delete_collection(name=RAG_CONFIG["collection_name"])
@@ -199,17 +309,22 @@ class AstraTradeRAG:
                         }
                     )
                 except Exception as e2:
-                    logger.error(f"Could not recreate collection: {e2}")
-                    return {"status": "error", "message": f"Failed to reset collection: {e2}"}
+                    logger.error(f"Could not recreate collection for {project_name}: {e2}")
+                    return {"status": "error", "message": f"Failed to reset collection for {project_name}: {e2}"}
         
         # Collect documents from all platforms
-        platform_results = await self._index_all_platforms()
+        platform_results = await self._index_all_platforms(project_name)
+        total_docs = sum(platform_results.values())
+        commit_docs_count = await self._index_commit_history()
+        pr_docs_count = await self._index_pull_requests()
+        total_docs += commit_docs_count + pr_docs_count
+        platform_results["commits"] = commit_docs_count
+        platform_results["pull_requests"] = pr_docs_count
         
         # Apply RAGFlow-inspired quality assessment
         quality_report = await self._assess_collection_quality()
         
         # Update stats
-        total_docs = sum(platform_results.values())
         self.documents_indexed = total_docs
         self.last_updated = datetime.now().isoformat()
         
@@ -228,18 +343,18 @@ class AstraTradeRAG:
             "time_taken": time_taken
         }
     
-    async def _index_all_platforms(self) -> Dict[str, int]:
-        """Index documentation from all AstraTrade platforms"""
+    async def _index_all_platforms(self, project_name: str) -> Dict[str, int]:
+        """Index documentation from all platforms for a specific project"""
         platform_results = {}
         
         for platform_name, indexer in self.platform_indexers.items():
             try:
-                logger.info(f"🔍 Indexing {platform_name} documentation...")
-                docs_count = await indexer.index_platform_docs(self)
+                logger.info(f"🔍 Indexing {platform_name} documentation for {project_name}...")
+                docs_count = await indexer.index_platform_docs(self, project_name)
                 platform_results[platform_name] = docs_count
-                logger.info(f"✅ Indexed {docs_count} documents from {platform_name}")
+                logger.info(f"✅ Indexed {docs_count} documents from {platform_name} for {project_name}")
             except Exception as e:
-                logger.error(f"❌ Failed to index {platform_name}: {str(e)}")
+                logger.error(f"❌ Failed to index {platform_name} for {project_name}: {str(e)}")
                 platform_results[platform_name] = 0
         
         return platform_results
@@ -282,37 +397,37 @@ class AstraTradeRAG:
             logger.error(f"Quality assessment failed: {str(e)}")
             return {"status": "assessment_failed", "error": str(e)}
     
-    async def _collect_astratrade_documentation(self) -> List[ProcessedDocument]:
-        """Collect all AstraTrade platform documentation with RAGFlow-inspired deep understanding"""
+    async def _collect_documentation(self, project_name: str) -> List[ProcessedDocument]:
+        """Collect all documentation for a specific project with RAGFlow-inspired deep understanding"""
         documents = []
         
         # Manual documentation files
-        documents.extend(await self._fetch_manual_docs())
+        documents.extend(await self._fetch_manual_docs(project_name))
         
         # Extended Exchange API documentation
-        documents.extend(await self._fetch_extended_exchange_docs())
+        documents.extend(await self._fetch_extended_exchange_docs(project_name))
         
         # X10 Python SDK documentation
-        documents.extend(await self._fetch_x10_python_docs())
+        documents.extend(await self._fetch_x10_python_docs(project_name))
         
         # Starknet.dart SDK documentation
-        documents.extend(await self._fetch_starknet_dart_docs())
+        documents.extend(await self._fetch_starknet_dart_docs(project_name))
         
         # Cairo language documentation
-        documents.extend(await self._fetch_cairo_docs())
+        documents.extend(await self._fetch_cairo_docs(project_name))
         
         # AVNU Paymaster documentation
-        documents.extend(await self._fetch_avnu_paymaster_docs())
+        documents.extend(await self._fetch_avnu_paymaster_docs(project_name))
         
         # Web3Auth documentation
-        documents.extend(await self._fetch_web3auth_docs())
+        documents.extend(await self._fetch_web3auth_docs(project_name))
         
         # ChipiPay SDK documentation
-        documents.extend(await self._fetch_chipi_pay_docs())
+        documents.extend(await self._fetch_chipi_pay_docs(project_name))
         
         return documents
     
-    async def _fetch_manual_docs(self) -> List[ProcessedDocument]:
+    async def _fetch_manual_docs(self, project_name: str) -> List[ProcessedDocument]:
         """Fetch manual documentation files from the docs folder"""
         documents = []
         docs_path = Path("../docs/manual_docs")
@@ -572,7 +687,8 @@ class AstraTradeRAG:
             for i, doc in enumerate(results["documents"][0]):
                 metadata = results["metadatas"][0][i] if results["metadatas"] else {}
                 distance = results["distances"][0][i] if results["distances"] else 0
-                similarity = 1 - distance  # Convert distance to similarity
+                # Better similarity calculation for cosine distance that can be > 1.0
+                similarity = max(0, 1 - (distance / 2.0))  # Normalized to 0-1 range
                 
                 if similarity >= min_similarity:
                     processed_results.append({

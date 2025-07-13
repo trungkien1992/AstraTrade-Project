@@ -21,10 +21,7 @@ from rag_system import AstraTradeRAG
 logger = logging.getLogger(__name__)
 
 class GraphAwareSearch:
-    """
-    Advanced search system that combines knowledge graph queries with vector search
-    for contextually aware and precise answers
-    """
+    """Advanced search system that combines knowledge graph queries with vector search for contextually aware and precise answers"""
     
     def __init__(self):
         self.rag_system = None

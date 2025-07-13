@@ -45,6 +45,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           style: GoogleFonts.orbitron(
             fontWeight: FontWeight.bold,
             letterSpacing: 1.5,
+            color: Colors.white,
           ),
         ),
         backgroundColor: Colors.transparent,

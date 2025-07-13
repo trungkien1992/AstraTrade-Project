@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AstraTrade Enhanced Categorization System
+Enhanced Categorization System
 Multi-platform categorization for trading platforms and blockchain documentation
 """
 
@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 
 class DocumentCategory(Enum):
-    """Document categories for AstraTrade platforms"""
+    """Document categories for any project"""
     # Trading Platform Categories
     TRADING_API = "trading_api"
     MARKET_DATA = "market_data"
@@ -47,7 +47,7 @@ class DocumentCategory(Enum):
     GENERAL = "general"
 
 class PlatformType(Enum):
-    """Supported platforms in AstraTrade ecosystem"""
+    """Supported platforms in any project"""
     EXTENDED_EXCHANGE = "extended_exchange"
     X10_PYTHON_SDK = "x10_python_sdk"
     STARKNET_DART = "starknet_dart"
@@ -69,8 +69,8 @@ class CategoryResult:
     doc_type: str    # 'api', 'tutorial', 'reference', 'example'
     tags: List[str]
 
-class AstraTradeCategorizer:
-    """Enhanced categorization system for AstraTrade multi-platform documentation"""
+class DocumentCategorizer:
+    """Enhanced categorization system for multi-platform documentation"""
     
     def __init__(self):
         self.platform_keywords = self._build_platform_keywords()
@@ -498,7 +498,7 @@ def categorize_document(content: str, file_path: str = "",
                        metadata: Dict[str, Any] = None) -> Dict[str, Any]:
     """Categorize a document and return result as dictionary"""
     
-    categorizer = AstraTradeCategorizer()
+    categorizer = DocumentCategorizer()
     result = categorizer.categorize_document(content, file_path, metadata)
     
     return {

@@ -75,6 +75,10 @@ class RAGOptimizationManager:
             "web3auth": 0.5,
             "chipi_pay": 0.4
         }
+        self.feedback_log: List[Dict[str, Any]] = []
+        self.feedback_log_file = "context_feedback_log.jsonl"
+        self.quality_metrics: List[Dict[str, Any]] = []
+        self.quality_metrics_file = "context_quality_metrics.jsonl"
         
     def log_query_performance(self, query: str, response_time: float, 
                             similarity_score: float, result_count: int,
@@ -98,6 +102,25 @@ class RAGOptimizationManager:
         # Keep only last 1000 queries to prevent memory issues
         if len(self.query_analytics) > 1000:
             self.query_analytics = self.query_analytics[-1000:]
+    
+    def log_feedback(self, feedback):
+        """
+        Store feedback for a context session, linking it to session_id, developer_id, and task_id.
+        Feedback should be a Pydantic/BaseModel or dict with keys: session_id, developer_id, task_id, rating, feedback_notes
+        """
+        # Convert feedback to dict if it's a Pydantic model
+        if hasattr(feedback, 'dict'):
+            feedback_data = feedback.dict()
+        else:
+            feedback_data = dict(feedback)
+        feedback_data['timestamp'] = datetime.now().isoformat()
+        self.feedback_log.append(feedback_data)
+        # Optionally, persist to file for durability
+        try:
+            with open(self.feedback_log_file, 'a') as f:
+                f.write(json.dumps(feedback_data) + '\n')
+        except Exception as e:
+            logger.warning(f"Failed to write feedback to file: {e}")
     
     def analyze_performance(self, timeframe_hours: int = 24) -> OptimizationMetrics:
         """Analyze RAG system performance over specified timeframe"""
@@ -166,6 +189,61 @@ class RAGOptimizationManager:
             slow_queries=slow_queries,
             optimization_suggestions=suggestions
         )
+    
+    def assess_context_quality(self):
+        """
+        Analyze logged feedback to identify high- and low-quality context patterns.
+        Store results in self.quality_metrics and persist to file.
+        """
+        high_threshold = 0.8
+        low_threshold = 0.4
+        results = []
+        for feedback in self.feedback_log:
+            session_id = feedback.get('session_id')
+            rating = feedback.get('rating', 0.0)
+            notes = feedback.get('feedback_notes', '')
+            # Placeholder: In a real system, fetch context features from session_id (e.g., from proactive_engine logs)
+            # Here, we simulate with dummy features
+            context_features = self._get_context_features_for_session(session_id)
+            assessment = {
+                'session_id': session_id,
+                'developer_id': feedback.get('developer_id'),
+                'task_id': feedback.get('task_id'),
+                'rating': rating,
+                'feedback_notes': notes,
+                'context_features': context_features,
+                'timestamp': feedback.get('timestamp'),
+                'quality': 'high' if rating >= high_threshold else ('low' if rating <= low_threshold else 'medium'),
+                'insights': []
+            }
+            if assessment['quality'] == 'high':
+                assessment['insights'].append(f"High quality: features present: {', '.join(context_features) if context_features else 'unknown'}")
+            elif assessment['quality'] == 'low':
+                assessment['insights'].append(f"Low quality: missing or weak features. Notes: {notes}")
+            else:
+                assessment['insights'].append("Medium quality: context partially useful.")
+            results.append(assessment)
+        self.quality_metrics = results
+        # Persist to file
+        try:
+            with open(self.quality_metrics_file, 'w') as f:
+                for metric in results:
+                    f.write(json.dumps(metric) + '\n')
+        except Exception as e:
+            logger.warning(f"Failed to write quality metrics to file: {e}")
+
+    def _get_context_features_for_session(self, session_id):
+        """
+        Placeholder: In a real system, fetch features from context logs or proactive_engine.
+        Here, we simulate with dummy features for demonstration.
+        """
+        # Simulate: alternate between some feature sets
+        if not session_id:
+            return []
+        if int(hash(session_id)) % 2 == 0:
+            return ["included 3 recent commits", "predicted the correct next file", "graph relationship present"]
+        else:
+            return ["no relevant documentation found", "graph relationship was incorrect"]
     
     def _get_index_size(self) -> int:
         """Get current index size"""

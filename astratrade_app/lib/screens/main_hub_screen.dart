@@ -10,6 +10,9 @@ import '../utils/constants.dart';
 import '../api/rag_api_client.dart';
 import '../services/game_service.dart';
 import 'leaderboard_screen.dart';
+import 'cosmic_forge_screen.dart';
+import 'orbital_forging_screen.dart';
+import 'cosmic_genesis_screen.dart';
 
 class MainHubScreen extends ConsumerStatefulWidget {
   const MainHubScreen({super.key});
@@ -78,8 +81,8 @@ class _MainHubScreenState extends ConsumerState<MainHubScreen> {
                       _buildProModeToggle(),
                       const SizedBox(height: 16),
                       
-                      // Quick Trade Section
-                      _buildQuickTradeSection(gameState, isTrading),
+                      // Core Game Actions
+                      _buildCoreGameActions(gameState, isTrading),
                       const SizedBox(height: 24),
 
                       // Game Progress Section
@@ -269,7 +272,7 @@ class _MainHubScreenState extends ConsumerState<MainHubScreen> {
   }
 
   /// Quick Trade section with pulsating button
-  Widget _buildQuickTradeSection(GameState gameState, bool isTrading) {
+  Widget _buildCoreGameActions(GameState gameState, bool isTrading) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -310,22 +313,148 @@ class _MainHubScreenState extends ConsumerState<MainHubScreen> {
           ),
           const SizedBox(height: 20),
           
-          // Trade Button (changes based on Pro Mode)
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: PulsatingButton(
-              text: isTrading 
-                  ? 'Channeling Energy...' 
-                  : _gameService.isProModeEnabled 
-                      ? '💎 REAL TRADE' 
-                      : '🌟 QUICK TRADE',
-              isLoading: isTrading,
-              onPressed: isTrading ? null : () => _performTrade(),
-              color: _gameService.isProModeEnabled 
-                  ? Colors.green.shade600 
-                  : Colors.purple.shade600,
-            ),
+          // Core Game Actions Grid (2x2)
+          Column(
+            children: [
+              // Top Row
+              Row(
+                children: [
+                  // Quick Trade Button
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: PulsatingButton(
+                        text: isTrading 
+                            ? 'Channeling Energy...' 
+                            : _gameService.isProModeEnabled 
+                                ? '💎 QUICK TRADE' 
+                                : '🌟 QUICK TRADE',
+                        isLoading: isTrading,
+                        onPressed: isTrading ? null : () => _performTrade(),
+                        color: _gameService.isProModeEnabled 
+                            ? Colors.green.shade600 
+                            : Colors.purple.shade600,
+                      ),
+                    ),
+                  ),
+                  
+                  const SizedBox(width: 12),
+                  
+                  // Cosmic Forge Button
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: () => _navigateToCosmicForge(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.indigo.shade600,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.auto_awesome, size: 20),
+                            const SizedBox(height: 4),
+                            Text(
+                              'COSMIC FORGE',
+                              style: GoogleFonts.orbitron(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              
+              const SizedBox(height: 12),
+              
+              // Bottom Row
+              Row(
+                children: [
+                  // Orbital Forging Button
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: () => _navigateToOrbitalForging(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.cyan.shade600,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.public, size: 20),
+                            const SizedBox(height: 4),
+                            Text(
+                              'PLANET',
+                              style: GoogleFonts.orbitron(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  const SizedBox(width: 12),
+                  
+                  // Cosmic Genesis Grid Button (Pro Trader only)
+                  Expanded(
+                    child: SizedBox(
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: gameState.hasGenesisIgnition 
+                            ? () => _navigateToCosmicGenesis()
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: gameState.hasGenesisIgnition 
+                              ? Colors.purple.shade600 
+                              : Colors.grey.shade700,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              gameState.hasGenesisIgnition 
+                                  ? Icons.grid_view 
+                                  : Icons.lock,
+                              size: 20,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              gameState.hasGenesisIgnition 
+                                  ? 'GENESIS GRID' 
+                                  : 'LOCKED',
+                              style: GoogleFonts.orbitron(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           
           const SizedBox(height: 16),
@@ -717,6 +846,31 @@ class _MainHubScreenState extends ConsumerState<MainHubScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LeaderboardScreen(),
+      ),
+    );
+  }
+  
+  /// Navigate to the Cosmic Forge Trading Screen
+  void _navigateToCosmicForge() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const CosmicForgeScreen(),
+      ),
+    );
+  }
+  
+  void _navigateToOrbitalForging() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const OrbitalForgingScreen(),
+      ),
+    );
+  }
+  
+  void _navigateToCosmicGenesis() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const CosmicGenesisScreen(),
       ),
     );
   }

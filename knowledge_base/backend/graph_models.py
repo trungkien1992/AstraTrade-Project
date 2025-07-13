@@ -68,8 +68,8 @@ class PullRequest:
     created_at: datetime
     node_id: Optional[str] = None
 
-class AstraTradeKnowledgeGraph:
-    """Knowledge graph for tracking relationships in AstraTrade project"""
+class KnowledgeGraph:
+    """Knowledge graph for tracking relationships in a project"""
     
     def __init__(self, uri: str = "bolt://localhost:7687", 
                  user: str = "neo4j", password: str = "astratrade123"):
@@ -367,4 +367,4 @@ class AstraTradeKnowledgeGraph:
         ]
 
 # Global instance
-knowledge_graph = AstraTradeKnowledgeGraph()
+knowledge_graph = KnowledgeGraph()

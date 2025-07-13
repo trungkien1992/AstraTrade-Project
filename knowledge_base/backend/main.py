@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-AstraTrade Enhanced RAG Backend
-High-performance Python-based RAG service for AstraTrade trading platform
+Universal RAG Backend
+High-performance Python-based RAG service for multi-platform knowledge bases
 Integrates Extended Exchange API, X10 Python SDK, Starknet.dart SDK, and Cairo documentation
 
 RAGFlow-inspired features:
@@ -18,6 +18,7 @@ import uuid
 from typing import Dict, Any
 from chromadb.utils import embedding_functions
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from pydantic import BaseModel
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,6 +29,15 @@ from config import RAG_CONFIG, settings
 from models import QueryRequest, QueryResponse, IndexRequest, IndexResponse, StatsResponse
 from rag_system import AstraTradeRAG
 from security import get_api_key
+
+# Phase 3: Proactive Context System
+try:
+    from proactive_context_engine import ProactiveContextEngine, ContextRequest
+    from predictive_analysis import PredictiveAnalyzer
+    PROACTIVE_AVAILABLE = True
+except ImportError:
+    PROACTIVE_AVAILABLE = False
+    print("Warning: Proactive context modules not found. Phase 3 functionality disabled.")
 
 # Enhanced categorization and indexing
 try:
@@ -50,8 +60,8 @@ logger = logging.getLogger(__name__)
 
 # FastAPI application
 app = FastAPI(
-    title="Starknet.dart SDK RAG API",
-    description="High-performance RAG service for Starknet.dart SDK knowledge base",
+    title="Universal RAG API",
+    description="High-performance RAG service for multi-platform knowledge bases",
     version="1.0.0"
 )
 
@@ -72,6 +82,13 @@ code_chunker = None
 claude_search = None
 search_analytics = ClaudeSearchAnalytics()
 
+# Initialize Phase 3: Proactive Context System
+proactive_engine = None
+predictive_analyzer = None
+
+# Initialize optimization manager
+optimization_manager = RAGOptimizationManager()
+
 # Task management system for asynchronous operations
 tasks = {}
 
@@ -81,9 +98,16 @@ async def startup_event():
     await rag_system.initialize()
     
     # Initialize Claude Code enhancements
-    global code_chunker, claude_search
+    global code_chunker, claude_search, proactive_engine, predictive_analyzer
     code_chunker = CodeAwareChunker(RAG_CONFIG)
     claude_search = ClaudeOptimizedSearch(rag_system, rag_system.collection, code_chunker)
+    
+    # Initialize Phase 3: Proactive Context System
+    if PROACTIVE_AVAILABLE:
+        proactive_engine = ProactiveContextEngine(rag_system)
+        predictive_analyzer = PredictiveAnalyzer(rag_system)
+        await proactive_engine.initialize()
+        print("✅ Phase 3: Proactive Context System initialized")
     
     print("✅ Claude Code enhancements initialized")
 
@@ -91,7 +115,7 @@ async def startup_event():
 async def root():
     """Root endpoint"""
     return {
-        "service": "Starknet.dart SDK RAG API",
+        "service": "Universal RAG API",
         "version": "1.0.0",
         "status": "running"
     }
@@ -449,6 +473,114 @@ async def get_task_status(task_id: str):
         })
     
     return response
+
+# Phase 3: Proactive Context Endpoints
+
+@app.post("/context/proactive")
+async def proactive_context_injection(request: Dict[str, Any]):
+    """
+    Phase 3: Real-time proactive context injection endpoint
+    Receives editor events and provides intelligent context before the developer asks
+    """
+    if not PROACTIVE_AVAILABLE or not proactive_engine:
+        raise HTTPException(
+            status_code=503, 
+            detail="Proactive context system not available. Please ensure Phase 3 modules are installed."
+        )
+    
+    try:
+        # Extract event information from request
+        event_type = request.get("event_type", "unknown")
+        filepath = request.get("filepath", "")
+        developer_id = request.get("developer_id", "anonymous")
+        cursor_position = request.get("cursor_position", {})
+        function_name = request.get("function_name", "")
+        class_name = request.get("class_name", "")
+        
+        # Validate required fields
+        if not filepath:
+            raise HTTPException(status_code=400, detail="filepath is required")
+        
+        # Create context request
+        context_request = ContextRequest(
+            event_type=event_type,
+            filepath=filepath,
+            developer_id=developer_id,
+            cursor_position=cursor_position,
+            function_name=function_name,
+            class_name=class_name
+        )
+        
+        # Get proactive context using Dynamic Context Assembly Engine
+        context_package = await proactive_engine.get_proactive_context(context_request)
+        
+        # Enhance with predictive analysis
+        predictive_insights = await predictive_analyzer.analyze_developer_intent(context_request)
+        
+        # Combine everything into a comprehensive response
+        response = {
+            "timestamp": datetime.now().isoformat(),
+            "event_processed": {
+                "type": event_type,
+                "file": filepath,
+                "developer": developer_id,
+                "function": function_name,
+                "class": class_name
+            },
+            "context_package": context_package,
+            "predictive_insights": predictive_insights,
+            "proactive_level": "god_mode_phase3",
+            "assembly_time": context_package.get("assembly_time", 0),
+            "prediction_time": predictive_insights.get("analysis_time", 0)
+        }
+        
+        # Log the proactive context event for analytics
+        await proactive_engine.log_context_event(context_request, response)
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Proactive context injection failed: {str(e)}")
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Failed to generate proactive context: {str(e)}"
+        )
+
+@app.get("/context/proactive/stats")
+async def get_proactive_context_stats():
+    """Get statistics about proactive context system usage"""
+    if not PROACTIVE_AVAILABLE or not proactive_engine:
+        raise HTTPException(status_code=503, detail="Proactive context system not available")
+    
+    stats = await proactive_engine.get_usage_stats()
+    prediction_stats = await predictive_analyzer.get_prediction_accuracy()
+    
+    return {
+        "proactive_context_stats": stats,
+        "prediction_accuracy": prediction_stats,
+        "system_status": "operational",
+        "phase": "god_mode_phase3",
+        "features": [
+            "Real-time context injection",
+            "Graph-aware context assembly",
+            "Predictive developer intent analysis",
+            "Impact analysis and blast radius",
+            "Cross-file relationship tracking",
+            "Ambient awareness system"
+        ]
+    }
+
+class ContextFeedback(BaseModel):
+    session_id: str
+    developer_id: str
+    task_id: str
+    rating: float  # e.g., a score from 0.0 to 1.0
+    feedback_notes: str = ""
+
+@app.post("/context/feedback")
+async def receive_context_feedback(feedback: ContextFeedback):
+    optimization_manager.log_feedback(feedback)
+    return {"status": "feedback received"}
 
 # Background task functions
 

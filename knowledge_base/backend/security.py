@@ -24,6 +24,7 @@ async def get_api_key(api_key: str = Security(api_key_header)) -> str:
     Raises:
         HTTPException: If API key is missing or invalid
     """
+    print(f"[DEBUG] Received API key: '{api_key}' | Expected: '{settings.api_key}'")
     if not api_key:
         raise HTTPException(
             status_code=403,
